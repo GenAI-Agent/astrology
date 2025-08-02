@@ -1,0 +1,9 @@
+quart==0.18.0
+quart-cors==0.6.0
+langchain==0.3.12
+langchain-openai==0.2.11
+langgraph==0.2.59
+langchain-core==0.3.27
+python-dotenv==1.0.0
+azure-identity==1.16.0
+requests==2.31.0
