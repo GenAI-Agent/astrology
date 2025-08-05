@@ -1,0 +1,409 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("USER_DATABASE_URL")
+}
+
+model User {
+  id            String            @id @default(cuid())
+  name          String?
+  email         String            @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  bio           String?
+  coverImage    String?
+  location      String?
+  website       String?
+  address       String?
+  motto         String?
+  password      String?
+  accounts      Account[]
+  Authenticator Authenticator[]
+  dataSets      DataSet[]
+  dnas          Dna[]
+  created_lens  Lens[]            @relation("CreatedLens")
+  lensGoods     LensGood[]
+  lensUsages    LensUsage[]
+  orders        Order[]
+  sessions      Session[]
+  subscriptions Subscription[]
+  tokenPage     TokenPage[]
+  couponUsages  UserCouponUsage[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
+
+model benchmark {
+  id               String          @id @default(cuid())
+  viewId           String          @unique
+  name             String          @default("")
+  description      String          @default("")
+  description_zhTW String          @default("")
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  status           Int             @default(1)
+  lenses           LensBenchmark[]
+}
+
+model Lens {
+  id                  String             @id @default(cuid())
+  viewId              String             @unique
+  name                String?            @default("")
+  description         String?            @default("")
+  rating              Float?             @default(0)
+  downloads           Int?               @default(0)
+  currency            String?            @default("")
+  image               String?            @default("")
+  price               Decimal?           @default(0)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  status              Int                @default(1)
+  lensTypeId          String?            @default("")
+  capabilities        Json?
+  creator_description String?            @default("")
+  inherited_from      String[]           @default([])
+  knowledge_structure String             @default("")
+  performance         Json?
+  white_paper         String?            @default("")
+  benchmarkImgs       String[]           @default([])
+  creatorUserId       String?
+  coupons             Coupon[]
+  creator             User?              @relation("CreatedLens", fields: [creatorUserId], references: [id])
+  benchmarks          LensBenchmark[]
+  lensGoods           LensGood[]
+  lensUsages          LensUsage[]
+  subscriptions       Subscription[]
+  subscriptionPlans   SubscriptionPlan[]
+}
+
+model LensGood {
+  id               String            @id @default(cuid())
+  viewId           String            @unique
+  tokenId          String            @default("")
+  userId           String
+  address          String?           @default("")
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  status           Int               @default(1)
+  apiUrl           String?           @default("")
+  lensViewId       String
+  process          Int               @default(1)
+  lens             Lens              @relation(fields: [lensViewId], references: [viewId])
+  user             User              @relation(fields: [userId], references: [id])
+  lensGoodDataSets LensGoodDataSet[] @relation("LensGoodDataSets")
+}
+
+model LensBenchmark {
+  id          String    @id @default(cuid())
+  lensId      String
+  benchmarkId String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  value       String    @default("")
+  benchmark   benchmark @relation(fields: [benchmarkId], references: [id], onDelete: Cascade)
+  lens        Lens      @relation(fields: [lensId], references: [id], onDelete: Cascade)
+
+  @@unique([lensId, benchmarkId])
+}
+
+model TokenPage {
+  id             String   @id @default(cuid())
+  viewId         String   @unique
+  title          String   @default("")
+  description    String   @default("")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  status         Int      @default(1)
+  userId         String   @default("")
+  LensViewIds    String[] @default([])
+  noIndex        Boolean  @default(false)
+  ogImage        String?
+  public         Boolean  @default(false)
+  publishedSlug  String?  @default("")
+  seoDescription String?
+  seoTitle       String?
+  user           User     @relation(fields: [userId], references: [id])
+}
+
+model LensType {
+  id          String   @id @default(cuid())
+  viewId      String   @unique
+  name        String?  @unique @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  status      Int      @default(1)
+  description String?  @default("")
+  image       String?  @default("")
+}
+
+model Dna {
+  id            String       @id @default(cuid())
+  viewId        String       @unique
+  userId        String       @default("")
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  status        Int          @default(1)
+  process       Int          @default(1)
+  title         String       @default("")
+  dnaTypeViewId String       @default("")
+  path          String       @default("")
+  size          Float        @default(0)
+  dataSetDnas   DataSetDna[]
+  dnaType       DnaType      @relation(fields: [dnaTypeViewId], references: [viewId])
+  user          User         @relation(fields: [userId], references: [id])
+}
+
+model DnaType {
+  id        String   @id @default(cuid())
+  viewId    String   @unique
+  name      String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Int      @default(1)
+  dnas      Dna[]
+}
+
+model DataSet {
+  id               String           @id @default(cuid())
+  viewId           String           @unique
+  name             String?          @default("")
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  status           Int              @default(1)
+  userId           String           @default("")
+  user             User             @relation(fields: [userId], references: [id])
+  dataSetDnas      DataSetDna[]
+  lensGoodDataSets LensGoodDataSet?
+}
+
+model DataSetDna {
+  id        String   @id @default(cuid())
+  viewId    String   @unique
+  dataSetId String
+  dnaId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Int      @default(1)
+  dataSet   DataSet  @relation(fields: [dataSetId], references: [id])
+  dna       Dna      @relation(fields: [dnaId], references: [id])
+
+  @@unique([dataSetId, dnaId])
+}
+
+model LensGoodDataSet {
+  id             String   @id @default(cuid())
+  viewId         String   @unique
+  uid            String   @default("")
+  dataSetId      String   @unique
+  lensGoodViewId String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  status         Int      @default(1)
+  dataSet        DataSet  @relation(fields: [dataSetId], references: [id])
+  lensGood       LensGood @relation("LensGoodDataSets", fields: [lensGoodViewId], references: [viewId])
+}
+
+model RequestDemo {
+  id          String   @id @default(cuid())
+  name        String   @default("")
+  email       String   @default("")
+  phone       String   @default("")
+  socialLinks String   @default("")
+  contentType String   @default("")
+  audience    String   @default("")
+  experience  String   @default("")
+  motivation  String   @default("")
+  portfolio   String   @default("")
+  agreement   String   @default("")
+  message     String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  status      Int      @default(1)
+}
+
+model prompts {
+  id       String    @id @default(cuid())
+  prompt   String
+  score    Int?
+  crt_time DateTime? @default(now())
+  tags     tags[]    @relation("PromptToTag")
+}
+
+model tags {
+  id          String    @id @default(cuid())
+  tag         String?
+  description String?
+  prompts     prompts[] @relation("PromptToTag")
+}
+
+model Coupon {
+  id                String            @id @default(cuid())
+  viewId            String            @unique
+  code              String            @unique
+  name              String
+  description       String?
+  discountType      String
+  discountValue     Int
+  minOrderAmount    Int?
+  maxDiscountAmount Int?
+  validFrom         DateTime
+  validTo           DateTime
+  maxUses           Int?
+  usedCount         Int               @default(0)
+  perUserLimit      Int               @default(1)
+  lensViewId        String?
+  planViewIds       String[]          @default([])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  status            Boolean           @default(true)
+  lens              Lens?             @relation(fields: [lensViewId], references: [viewId])
+  orders            Order[]
+  couponUsages      UserCouponUsage[]
+}
+
+model Order {
+  id             String            @id @default(cuid())
+  userId         String
+  totalAmount    Int
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  paymentDetails String?
+  subscriptionId String?
+  couponId       String?
+  discountAmount Int               @default(0)
+  originalAmount Int
+  status         Int               @default(1)
+  coupon         Coupon?           @relation(fields: [couponId], references: [id])
+  subscription   Subscription?     @relation(fields: [subscriptionId], references: [id])
+  user           User              @relation(fields: [userId], references: [id])
+  couponUsages   UserCouponUsage[]
+}
+
+model UserCouponUsage {
+  id       String   @id @default(cuid())
+  userId   String
+  couponId String
+  usedAt   DateTime @default(now())
+  orderId  String
+  coupon   Coupon   @relation(fields: [couponId], references: [id])
+  order    Order    @relation(fields: [orderId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, couponId, orderId])
+}
+
+model SubscriptionPlan {
+  id              String         @id @default(cuid())
+  name            String
+  price           Int
+  duration        Int
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  currency        String         @default("USD")
+  discountMonthly Int?
+  isPopular       Boolean        @default(false)
+  lensViewId      String
+  type            String
+  viewId          String         @unique
+  description     Json?
+  features        Json?
+  status          Int            @default(1)
+  subscriptions   Subscription[]
+  lens            Lens           @relation(fields: [lensViewId], references: [viewId])
+}
+
+model Subscription {
+  id          String           @id @default(cuid())
+  userId      String
+  planId      String
+  startDate   DateTime         @default(now())
+  endDate     DateTime
+  autoRenew   Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  cancelledAt DateTime?
+  lensViewId  String
+  trialEndsAt DateTime?
+  status      Int              @default(1)
+  orders      Order[]
+  lens        Lens             @relation(fields: [lensViewId], references: [viewId])
+  plan        SubscriptionPlan @relation(fields: [planId], references: [id])
+  user        User             @relation(fields: [userId], references: [id])
+}
+
+model LensUsage {
+  id         String   @id @default(cuid())
+  userId     String
+  lensViewId String
+  date       DateTime @default(now()) @db.Date
+  count      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  lens       Lens     @relation(fields: [lensViewId], references: [viewId], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lensViewId, date])
+}
+
+model QuantDailyReports {
+  id        String   @id @default(cuid())
+  viewId    String   @unique
+  type      String
+  title     String
+  fileName  String
+  createdAt DateTime @default(now())
+  status    Int      @default(1)
+}
