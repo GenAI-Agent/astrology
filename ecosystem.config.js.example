@@ -1,0 +1,28 @@
+module.exports = {
+  apps: [
+    {
+      name: "Astro_Lens_dev_web",
+      script: "node_modules/next/dist/bin/next",
+      cwd: "/home/ubuntu/lens_astro",
+      args: "start -p 5081",
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: "1G",
+      env: {
+        NODE_ENV: "production",
+        NEXT_PUBLIC_PRODUCTION_URL: "https://astro.ask-lens.ai",
+        NEXT_PUBLIC_DEVELOPMENT_URL: "https://astro-develop.ask-lens.ai",
+        NEXT_PUBLIC_BASE_URL: "https://webdev.ask-lens.ai",
+        NEXT_PUBLIC_BASE_API_URL: "https://api.ask-lens.ai",
+        NEXT_PUBLIC_SITE_URL: "https://astro.ask-lens.ai",
+        DATABASE_URL: "your_database_url_here",
+        MONGODB_URI: "your_mongodb_uri_here",
+        AUTH_GOOGLE_ID: "your_google_oauth_client_id_here",
+        AUTH_GOOGLE_SECRET: "your_google_oauth_client_secret_here",
+        GOOGLE_API_KEY: "your_google_api_key_here",
+        AUTH_SECRET: "your_auth_secret_here",
+      },
+    },
+  ],
+};

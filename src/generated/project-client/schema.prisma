@@ -10,7 +10,7 @@ datasource db {
 
 model AstroUser {
   id              String    @id // 直接使用認證系統的用戶ID作為主鍵
-  birthDate       DateTime? @map("birth_date") @db.Date
+  birthDate       DateTime  @map("birth_date") @db.Date
   birthTime       DateTime? @map("birth_time") @db.Time
   birthLocation   String    @map("birth_location")
   latitude        Decimal?  @db.Decimal(10, 8)

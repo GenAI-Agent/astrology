@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { v4 as uuidv4 } from 'uuid';
@@ -24,7 +24,7 @@ const Galaxy = dynamic(() => import('@/components/Galaxy'), { ssr: false });
 const AstroChart = dynamic(() => import('@/components/AstroChart'), { ssr: false });
 
 
-export default function Home() {
+function HomeContent() {
   const [mounted, setMounted] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -157,6 +157,22 @@ export default function Home() {
         <div className="relative mb-12 flex items-center justify-center">
           {mounted && (
             <AstroChart
+              data={{
+                planets: {
+                  Sun: [164],
+                  Moon: [130],
+                  Mercury: [162],
+                  Venus: [139],
+                  Mars: [242],
+                  Jupiter: [34],
+                  Saturn: [47],
+                  Uranus: [313],
+                  Neptune: [301],
+                  Pluto: [247],
+                  NorthNode: [132],
+                },
+                cusps: [296, 350, 30, 56, 75, 94, 116, 170, 210, 236, 255, 274]
+              }}
               id="astro-chart-home"
               width={450}
               height={450}
@@ -181,7 +197,7 @@ export default function Home() {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white">
               <h2 className="text-3xl md:text-4xl font-serif mb-4">
-                Navigate Life's Journey with <span className="text-blue-300 italic">Stellar Guidance</span>
+                {`Navigate Life's Journey with`} <span className="text-blue-300 italic">Stellar Guidance</span>
               </h2>
               <p className="text-lg opacity-90 max-w-2xl">
                 Let the ancient wisdom of the cosmos illuminate your path forward
@@ -343,5 +359,13 @@ export default function Home() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <HomeContent />
+    </Suspense>
   );
 }

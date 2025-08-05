@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ReactMarkdownCustom } from "@/components/ReactMarkdownCustom";
 import { processContent } from "@/utils/text";
 import SearchAstro from "../toolResult/SearchAstro";
-import SearchReadings from "../toolResult/SearchReadings";
+// import SearchReadings from "../toolResult/SearchReadings";
 
 export function ToolResult({
   toolName,
@@ -18,7 +18,7 @@ export function ToolResult({
   // 使用组件映射表替代if-else链
   const toolComponentMap: Record<string, React.ReactNode> = {
     search_astro: <SearchAstro results={toolResult} />,
-    search_readings: <SearchReadings results={toolResult} />,
+    // search_readings: <SearchReadings results={toolResult} />,
   };
 
   if (toolResult && typeof toolResult === "object" && "error" in toolResult) {

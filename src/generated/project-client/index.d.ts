@@ -1359,7 +1359,7 @@ export namespace Prisma {
 
   export type AstroUserGroupByOutputType = {
     id: string
-    birthDate: Date | null
+    birthDate: Date
     birthTime: Date | null
     birthLocation: string
     latitude: Decimal | null
@@ -1463,7 +1463,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      birthDate: Date | null
+      birthDate: Date
       birthTime: Date | null
       birthLocation: string
       latitude: Prisma.Decimal | null
@@ -4883,7 +4883,7 @@ export namespace Prisma {
     OR?: AstroUserWhereInput[]
     NOT?: AstroUserWhereInput | AstroUserWhereInput[]
     id?: StringFilter<"AstroUser"> | string
-    birthDate?: DateTimeNullableFilter<"AstroUser"> | Date | string | null
+    birthDate?: DateTimeFilter<"AstroUser"> | Date | string
     birthTime?: DateTimeNullableFilter<"AstroUser"> | Date | string | null
     birthLocation?: StringFilter<"AstroUser"> | string
     latitude?: DecimalNullableFilter<"AstroUser"> | Decimal | DecimalJsLike | number | string | null
@@ -4898,7 +4898,7 @@ export namespace Prisma {
 
   export type AstroUserOrderByWithRelationInput = {
     id?: SortOrder
-    birthDate?: SortOrderInput | SortOrder
+    birthDate?: SortOrder
     birthTime?: SortOrderInput | SortOrder
     birthLocation?: SortOrder
     latitude?: SortOrderInput | SortOrder
@@ -4916,7 +4916,7 @@ export namespace Prisma {
     AND?: AstroUserWhereInput | AstroUserWhereInput[]
     OR?: AstroUserWhereInput[]
     NOT?: AstroUserWhereInput | AstroUserWhereInput[]
-    birthDate?: DateTimeNullableFilter<"AstroUser"> | Date | string | null
+    birthDate?: DateTimeFilter<"AstroUser"> | Date | string
     birthTime?: DateTimeNullableFilter<"AstroUser"> | Date | string | null
     birthLocation?: StringFilter<"AstroUser"> | string
     latitude?: DecimalNullableFilter<"AstroUser"> | Decimal | DecimalJsLike | number | string | null
@@ -4931,7 +4931,7 @@ export namespace Prisma {
 
   export type AstroUserOrderByWithAggregationInput = {
     id?: SortOrder
-    birthDate?: SortOrderInput | SortOrder
+    birthDate?: SortOrder
     birthTime?: SortOrderInput | SortOrder
     birthLocation?: SortOrder
     latitude?: SortOrderInput | SortOrder
@@ -4953,7 +4953,7 @@ export namespace Prisma {
     OR?: AstroUserScalarWhereWithAggregatesInput[]
     NOT?: AstroUserScalarWhereWithAggregatesInput | AstroUserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AstroUser"> | string
-    birthDate?: DateTimeNullableWithAggregatesFilter<"AstroUser"> | Date | string | null
+    birthDate?: DateTimeWithAggregatesFilter<"AstroUser"> | Date | string
     birthTime?: DateTimeNullableWithAggregatesFilter<"AstroUser"> | Date | string | null
     birthLocation?: StringWithAggregatesFilter<"AstroUser"> | string
     latitude?: DecimalNullableWithAggregatesFilter<"AstroUser"> | Decimal | DecimalJsLike | number | string | null
@@ -5137,7 +5137,7 @@ export namespace Prisma {
 
   export type AstroUserCreateInput = {
     id: string
-    birthDate?: Date | string | null
+    birthDate: Date | string
     birthTime?: Date | string | null
     birthLocation: string
     latitude?: Decimal | DecimalJsLike | number | string | null
@@ -5152,7 +5152,7 @@ export namespace Prisma {
 
   export type AstroUserUncheckedCreateInput = {
     id: string
-    birthDate?: Date | string | null
+    birthDate: Date | string
     birthTime?: Date | string | null
     birthLocation: string
     latitude?: Decimal | DecimalJsLike | number | string | null
@@ -5167,7 +5167,7 @@ export namespace Prisma {
 
   export type AstroUserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     birthLocation?: StringFieldUpdateOperationsInput | string
     latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -5182,7 +5182,7 @@ export namespace Prisma {
 
   export type AstroUserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     birthLocation?: StringFieldUpdateOperationsInput | string
     latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -5197,7 +5197,7 @@ export namespace Prisma {
 
   export type AstroUserCreateManyInput = {
     id: string
-    birthDate?: Date | string | null
+    birthDate: Date | string
     birthTime?: Date | string | null
     birthLocation: string
     latitude?: Decimal | DecimalJsLike | number | string | null
@@ -5211,7 +5211,7 @@ export namespace Prisma {
 
   export type AstroUserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     birthLocation?: StringFieldUpdateOperationsInput | string
     latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -5225,7 +5225,7 @@ export namespace Prisma {
 
   export type AstroUserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     birthLocation?: StringFieldUpdateOperationsInput | string
     latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -5443,6 +5443,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -5501,17 +5512,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type ChatSessionListRelationFilter = {
@@ -5597,6 +5597,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -5669,20 +5683,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -5923,6 +5923,10 @@ export namespace Prisma {
     set?: string
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -5937,10 +5941,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type ChatSessionUpdateManyWithoutUserNestedInput = {
@@ -6079,6 +6079,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -6115,17 +6126,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6152,6 +6152,20 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6233,20 +6247,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -6420,7 +6420,7 @@ export namespace Prisma {
 
   export type AstroUserCreateWithoutChatSessionsInput = {
     id: string
-    birthDate?: Date | string | null
+    birthDate: Date | string
     birthTime?: Date | string | null
     birthLocation: string
     latitude?: Decimal | DecimalJsLike | number | string | null
@@ -6434,7 +6434,7 @@ export namespace Prisma {
 
   export type AstroUserUncheckedCreateWithoutChatSessionsInput = {
     id: string
-    birthDate?: Date | string | null
+    birthDate: Date | string
     birthTime?: Date | string | null
     birthLocation: string
     latitude?: Decimal | DecimalJsLike | number | string | null
@@ -6508,7 +6508,7 @@ export namespace Prisma {
 
   export type AstroUserUpdateWithoutChatSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     birthLocation?: StringFieldUpdateOperationsInput | string
     latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -6522,7 +6522,7 @@ export namespace Prisma {
 
   export type AstroUserUncheckedUpdateWithoutChatSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     birthLocation?: StringFieldUpdateOperationsInput | string
     latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null

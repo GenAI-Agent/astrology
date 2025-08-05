@@ -5,6 +5,7 @@ import { PrismaClient } from '@/generated/project-client';
 import { SessionHistory } from "@/types/Message";
 import AstrologyClient from "./client";
 import { UserData } from "@/types/User";
+import { Message } from "@/types/Message";
 
 const prisma = new PrismaClient();
 
@@ -74,7 +75,7 @@ export default async function Page({
           sessionId: chatSession.sessionId,
           userId: chatSession.userId,
           title: chatSession.title,
-          messages: messages,
+          messages: messages as Message[],
           createdAt: chatSession.createdAt,
           updatedAt: chatSession.updatedAt
         };

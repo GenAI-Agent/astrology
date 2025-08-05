@@ -115,6 +115,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               data: {
                 id: user.id as string,
                 birthLocation: "",
+                birthDate: new Date(),
               },
             });
             console.log(`Created new astro_user record for user ${user.id}`);
