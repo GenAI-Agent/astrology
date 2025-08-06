@@ -25,7 +25,7 @@ export default function Header() {
 
         {session?.user ? (
           <Link
-            href="/astrology"
+            href="/chat"
             className="bg-primary text-primary-foreground px-6 py-2 rounded-full hover:opacity-90 transition-opacity"
           >
             Start App

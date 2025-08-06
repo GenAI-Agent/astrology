@@ -91,7 +91,7 @@ export default function LensInput({
 
           <input
             value={query}
-            placeholder="問我任何占星問題..."
+            placeholder="Ask me anything about astrology..."
             onChange={onChange}
             disabled={isChatLoading || isStreaming}
             onKeyDown={handleKeyDown}

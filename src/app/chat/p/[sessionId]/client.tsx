@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useChat } from "@/hooks/useChat";
 import { SessionHistory } from "@/types/Message";
 import { UserData } from "@/types/User";
-import { useChatStore } from "@/stores/useChatStore";
+import { useLensChat } from "@/stores/useLensChat";
 
 export default function AstrologyClient({
   sessionId,
@@ -26,13 +26,13 @@ export default function AstrologyClient({
   const [query, setQuery] = useState("");
   const [currentTitle, setCurrentTitle] = useState(chatHistory?.title || "");
   const [isInitializing, setIsInitializing] = useState(true);
-  const { fetchAllChatSessions } = useChatStore();
+  const { fetchAllLensChatHistory } = useLensChat();
 
   useEffect(() => {
     if (user?.id) {
-      fetchAllChatSessions(user.id);
+      fetchAllLensChatHistory(user.id);
     }
-  }, [user?.id, fetchAllChatSessions]);
+  }, [user?.id, fetchAllLensChatHistory]);
 
   const {
     handleChat,
@@ -164,7 +164,7 @@ export default function AstrologyClient({
           <LoadingText />
         </div>
       ) : (
-        <div className="mx-auto flex h-full w-full px-2 sm:px-4 gap-2 sm:gap-4 flex-1">
+        <div className="mx-auto flex h-full w-full flex-1">
           <ChatSection
             isToolPanel={true}
             chatHistory={chatHistory?.messages || []}

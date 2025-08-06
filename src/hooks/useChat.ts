@@ -180,51 +180,51 @@ export const useChat = ({
               try {
                 const jsonStr = line.replace("data: ", "");
                 const parsedData = JSON.parse(jsonStr);
-                if (parsedData.type === "start_response") {
-                  setCurrentChat((prev) => {
-                    // 找到最后一条 human 消息的索引
-                    const lastHumanIndex = [...prev].findLastIndex(
-                      (msg) => msg.role === "human"
-                    );
+                // if (parsedData.type === "start_response") {
+                //   setCurrentChat((prev) => {
+                //     // 找到最后一条 human 消息的索引
+                //     const lastHumanIndex = [...prev].findLastIndex(
+                //       (msg) => msg.role === "human"
+                //     );
 
-                    // 初始化 sources 数组
-                    let sources = [];
+                //     // 初始化 sources 数组
+                //     let sources = [];
 
-                    // 如果找到了 human 消息
-                    if (lastHumanIndex !== -1) {
-                      // 查找该 human 消息之后的消息中是否有符合条件的 tool_result 消息
-                      for (let i = lastHumanIndex + 1; i < prev.length; i++) {
-                        const msg = prev[i];
-                        if (
-                          msg.type === "tool_result" &&
-                          msg.tool_name === "search_astro" &&
-                          msg.tool_result
-                        ) {
-                          sources = msg.tool_result as any;
-                          break;
-                        }
-                      }
-                    }
+                //     // 如果找到了 human 消息
+                //     if (lastHumanIndex !== -1) {
+                //       // 查找该 human 消息之后的消息中是否有符合条件的 tool_result 消息
+                //       for (let i = lastHumanIndex + 1; i < prev.length; i++) {
+                //         const msg = prev[i];
+                //         if (
+                //           msg.type === "tool_result" &&
+                //           msg.tool_name === "search_astro" &&
+                //           msg.tool_result
+                //         ) {
+                //           sources = msg.tool_result as any;
+                //           break;
+                //         }
+                //       }
+                //     }
 
-                    let newOrder = 0;
-                    setMessageOrderCounter((prevOrder) => {
-                      newOrder = prevOrder;
-                      return prevOrder + 1;
-                    });
+                //     let newOrder = 0;
+                //     setMessageOrderCounter((prevOrder) => {
+                //       newOrder = prevOrder;
+                //       return prevOrder + 1;
+                //     });
 
-                    return [
-                      ...prev,
-                      {
-                        role: "ai",
-                        content: "",
-                        sources: sources,
-                        prompts: [],
-                        type: "text",
-                        messageOrder: newOrder,
-                      },
-                    ];
-                  });
-                }
+                //     return [
+                //       ...prev,
+                //       {
+                //         role: "ai",
+                //         content: "",
+                //         sources: sources,
+                //         prompts: [],
+                //         type: "text",
+                //         messageOrder: newOrder,
+                //       },
+                //     ];
+                //   });
+                // }
                 if (parsedData.chunk) {
                   setCurrentChat((prev) => {
                     const lastMessage = prev[prev.length - 1];

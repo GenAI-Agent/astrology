@@ -103,8 +103,7 @@ function HomeContent() {
           );
         }
 
-        // 立即跳轉，不等待 API 請求
-        router.push(`/astrology/`);
+        router.push(`/chat/p/${sessionId}`);
       } catch (error) {
         console.error(error);
         setIsLoading(false);

@@ -51,7 +51,7 @@ const arePropsEqual = (prevProps: RightPanelProps, nextProps: RightPanelProps) =
       const latestMessage = nextProps.currentChat[nextProps.currentChat.length - 1];
       if (
         latestMessage.type === "tool_result" &&
-        latestMessage.tool_name === "get_astro_chart_image"
+        latestMessage.tool_name === "get_chart"
       ) {
         return false; // Re-render for new chart message
       }
@@ -156,7 +156,7 @@ export const RightPanelTest = memo(({
     const allMessages = [...(chatHistory || []), ...(currentChat || [])];
     return allMessages.some((msg): msg is ToolResultMessage =>
       msg.type === "tool_result" &&
-      msg.tool_name === "get_astro_chart_image"
+      msg.tool_name === "get_chart"
     );
   }, [chatHistory?.length, currentChat?.length]);
 
@@ -174,7 +174,7 @@ export const RightPanelTest = memo(({
 
         if (
           latestMessage.type === "tool_result" &&
-          latestMessage.tool_name === "get_astro_chart_image"
+          latestMessage.tool_name === "get_chart"
         ) {
           // Update chart data only if it's a new chart message
           const toolResultMessage = latestMessage as ToolResultMessage;
@@ -200,7 +200,7 @@ export const RightPanelTest = memo(({
         .reverse()
         .find((msg): msg is ToolResultMessage =>
           msg.type === "tool_result" &&
-          msg.tool_name === "get_astro_chart_image"
+          msg.tool_name === "get_chart"
         );
 
       if (latestChartMessage?.tool_result) {
@@ -214,7 +214,6 @@ export const RightPanelTest = memo(({
       }
     }
   }, [hasChartMessage, chatHistory, currentChat]);
-  console.log("stableFormattedData", stableFormattedData);
   return (
     <div
       className={cn(
@@ -224,7 +223,7 @@ export const RightPanelTest = memo(({
       )}
     >
       <div className="p-6 space-y-6">
-        <div className="bg-secondary/30 rounded-lg p-4 space-y-3">
+        {/* <div className="bg-secondary/30 rounded-lg p-4 space-y-3">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-foreground">Profile</h3>
             <button
@@ -264,20 +263,20 @@ export const RightPanelTest = memo(({
               {"userProfile?.dailyHoroscope"}
             </p>
           </div>
-        </div>
+        </div> */}
 
         {hasChartMessage && (
           <div className="bg-secondary/30 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Birth Chart</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4">Astro Chart</h3>
 
             {stableFormattedData ? (
               <AstroChart
                 id="astro-chart-home"
                 data={stableFormattedData as any}
-                width={450}
-                height={450}
+                width={400}
+                height={400}
                 showAspects={true}
-                className="w-full max-w-lg"
+                className="w-full flex justify-center max-w-lg"
               />
             ) : (
               <div className="flex items-center justify-center h-[450px]">
@@ -290,7 +289,7 @@ export const RightPanelTest = memo(({
         <div className="bg-secondary/30 rounded-lg p-4">
           <h3 className="text-lg font-semibold text-foreground mb-4">Planetary Positions</h3>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             {stableFormattedData && stableFormattedData.planets ? (
               Object.entries({
                 Sun: '☉ Sun',
@@ -319,9 +318,17 @@ export const RightPanelTest = memo(({
                 const position = `${zodiacSigns[signIndex]} ${signDegree}°`;
 
                 return (
-                  <div key={planetKey} className="flex justify-between text-xs">
-                    <span className="text-secondary-foreground/80">{planetSymbol}</span>
-                    <span className="text-foreground">{position}</span>
+                  <div key={planetKey} className="bg-secondary/20 rounded-md p-4 border border-secondary/30 hover:bg-secondary/30 transition-colors">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="text-base font-medium text-foreground">{planetSymbol}</span>
+                      <span className="text-base font-semibold text-foreground">{position}</span>
+                    </div>
+                    <div className="text-sm text-secondary-foreground/70">
+                      {/* 預留給解釋文字的空間 */}
+                      <p className="line-clamp-2">
+                        {/* 這裡可以放置對這個行星位置的解釋 */}
+                      </p>
+                    </div>
                   </div>
                 );
               }).filter(Boolean)
@@ -340,9 +347,11 @@ export const RightPanelTest = memo(({
                 { planet: '☊ North Node', position: '—' },
                 { planet: '☋ South Node', position: '—' }
               ].map((item, index) => (
-                <div key={index} className="flex justify-between text-xs">
-                  <span className="text-secondary-foreground/80">{item.planet}</span>
-                  <span className="text-foreground">{item.position}</span>
+                <div key={index} className="bg-secondary/20 rounded-md p-4 border border-secondary/30">
+                  <div className="flex justify-between items-start">
+                    <span className="text-base font-medium text-secondary-foreground/80">{item.planet}</span>
+                    <span className="text-base font-semibold text-foreground">{item.position}</span>
+                  </div>
                 </div>
               ))
             )}

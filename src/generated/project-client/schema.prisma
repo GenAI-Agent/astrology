@@ -91,3 +91,20 @@ enum MessageType {
   tool_result  @map("tool_result")
   choose_agent @map("choose_agent")
 }
+
+model AstroDataset {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId         String   @map("user_id")
+  promptTemplate String   @map("prompt_template")
+  history        String
+  toolResult     String   @map("tool_result")
+  userInput      String   @map("user_input")
+  modelAnswer    String   @map("model_answer")
+  tristanAnswer  String?  @map("tristan_answer")
+  modelScore     Float?   @map("model_score")
+  tristanScore   Float?   @map("tristan_score")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("astro_dataset")
+}

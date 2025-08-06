@@ -28,6 +28,11 @@ export type ChatSession = $Result.DefaultSelection<Prisma.$ChatSessionPayload>
  * 
  */
 export type ChatMessage = $Result.DefaultSelection<Prisma.$ChatMessagePayload>
+/**
+ * Model AstroDataset
+ * 
+ */
+export type AstroDataset = $Result.DefaultSelection<Prisma.$AstroDatasetPayload>
 
 /**
  * Enums
@@ -214,6 +219,16 @@ export class PrismaClient<
     * ```
     */
   get chatMessage(): Prisma.ChatMessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.astroDataset`: Exposes CRUD operations for the **AstroDataset** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AstroDatasets
+    * const astroDatasets = await prisma.astroDataset.findMany()
+    * ```
+    */
+  get astroDataset(): Prisma.AstroDatasetDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -656,7 +671,8 @@ export namespace Prisma {
   export const ModelName: {
     AstroUser: 'AstroUser',
     ChatSession: 'ChatSession',
-    ChatMessage: 'ChatMessage'
+    ChatMessage: 'ChatMessage',
+    AstroDataset: 'AstroDataset'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -675,7 +691,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "astroUser" | "chatSession" | "chatMessage"
+      modelProps: "astroUser" | "chatSession" | "chatMessage" | "astroDataset"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -901,6 +917,80 @@ export namespace Prisma {
           }
         }
       }
+      AstroDataset: {
+        payload: Prisma.$AstroDatasetPayload<ExtArgs>
+        fields: Prisma.AstroDatasetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AstroDatasetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AstroDatasetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>
+          }
+          findFirst: {
+            args: Prisma.AstroDatasetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AstroDatasetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>
+          }
+          findMany: {
+            args: Prisma.AstroDatasetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>[]
+          }
+          create: {
+            args: Prisma.AstroDatasetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>
+          }
+          createMany: {
+            args: Prisma.AstroDatasetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AstroDatasetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>[]
+          }
+          delete: {
+            args: Prisma.AstroDatasetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>
+          }
+          update: {
+            args: Prisma.AstroDatasetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>
+          }
+          deleteMany: {
+            args: Prisma.AstroDatasetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AstroDatasetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AstroDatasetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>[]
+          }
+          upsert: {
+            args: Prisma.AstroDatasetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AstroDatasetPayload>
+          }
+          aggregate: {
+            args: Prisma.AstroDatasetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAstroDataset>
+          }
+          groupBy: {
+            args: Prisma.AstroDatasetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AstroDatasetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AstroDatasetCountArgs<ExtArgs>
+            result: $Utils.Optional<AstroDatasetCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -996,6 +1086,7 @@ export namespace Prisma {
     astroUser?: AstroUserOmit
     chatSession?: ChatSessionOmit
     chatMessage?: ChatMessageOmit
+    astroDataset?: AstroDatasetOmit
   }
 
   /* Types for Logging */
@@ -4654,6 +4745,1130 @@ export namespace Prisma {
 
 
   /**
+   * Model AstroDataset
+   */
+
+  export type AggregateAstroDataset = {
+    _count: AstroDatasetCountAggregateOutputType | null
+    _avg: AstroDatasetAvgAggregateOutputType | null
+    _sum: AstroDatasetSumAggregateOutputType | null
+    _min: AstroDatasetMinAggregateOutputType | null
+    _max: AstroDatasetMaxAggregateOutputType | null
+  }
+
+  export type AstroDatasetAvgAggregateOutputType = {
+    modelScore: number | null
+    tristanScore: number | null
+  }
+
+  export type AstroDatasetSumAggregateOutputType = {
+    modelScore: number | null
+    tristanScore: number | null
+  }
+
+  export type AstroDatasetMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    promptTemplate: string | null
+    history: string | null
+    toolResult: string | null
+    userInput: string | null
+    modelAnswer: string | null
+    tristanAnswer: string | null
+    modelScore: number | null
+    tristanScore: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AstroDatasetMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    promptTemplate: string | null
+    history: string | null
+    toolResult: string | null
+    userInput: string | null
+    modelAnswer: string | null
+    tristanAnswer: string | null
+    modelScore: number | null
+    tristanScore: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AstroDatasetCountAggregateOutputType = {
+    id: number
+    userId: number
+    promptTemplate: number
+    history: number
+    toolResult: number
+    userInput: number
+    modelAnswer: number
+    tristanAnswer: number
+    modelScore: number
+    tristanScore: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AstroDatasetAvgAggregateInputType = {
+    modelScore?: true
+    tristanScore?: true
+  }
+
+  export type AstroDatasetSumAggregateInputType = {
+    modelScore?: true
+    tristanScore?: true
+  }
+
+  export type AstroDatasetMinAggregateInputType = {
+    id?: true
+    userId?: true
+    promptTemplate?: true
+    history?: true
+    toolResult?: true
+    userInput?: true
+    modelAnswer?: true
+    tristanAnswer?: true
+    modelScore?: true
+    tristanScore?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AstroDatasetMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    promptTemplate?: true
+    history?: true
+    toolResult?: true
+    userInput?: true
+    modelAnswer?: true
+    tristanAnswer?: true
+    modelScore?: true
+    tristanScore?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AstroDatasetCountAggregateInputType = {
+    id?: true
+    userId?: true
+    promptTemplate?: true
+    history?: true
+    toolResult?: true
+    userInput?: true
+    modelAnswer?: true
+    tristanAnswer?: true
+    modelScore?: true
+    tristanScore?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AstroDatasetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AstroDataset to aggregate.
+     */
+    where?: AstroDatasetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AstroDatasets to fetch.
+     */
+    orderBy?: AstroDatasetOrderByWithRelationInput | AstroDatasetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AstroDatasetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AstroDatasets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AstroDatasets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AstroDatasets
+    **/
+    _count?: true | AstroDatasetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AstroDatasetAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AstroDatasetSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AstroDatasetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AstroDatasetMaxAggregateInputType
+  }
+
+  export type GetAstroDatasetAggregateType<T extends AstroDatasetAggregateArgs> = {
+        [P in keyof T & keyof AggregateAstroDataset]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAstroDataset[P]>
+      : GetScalarType<T[P], AggregateAstroDataset[P]>
+  }
+
+
+
+
+  export type AstroDatasetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AstroDatasetWhereInput
+    orderBy?: AstroDatasetOrderByWithAggregationInput | AstroDatasetOrderByWithAggregationInput[]
+    by: AstroDatasetScalarFieldEnum[] | AstroDatasetScalarFieldEnum
+    having?: AstroDatasetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AstroDatasetCountAggregateInputType | true
+    _avg?: AstroDatasetAvgAggregateInputType
+    _sum?: AstroDatasetSumAggregateInputType
+    _min?: AstroDatasetMinAggregateInputType
+    _max?: AstroDatasetMaxAggregateInputType
+  }
+
+  export type AstroDatasetGroupByOutputType = {
+    id: string
+    userId: string
+    promptTemplate: string
+    history: string
+    toolResult: string
+    userInput: string
+    modelAnswer: string
+    tristanAnswer: string | null
+    modelScore: number | null
+    tristanScore: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AstroDatasetCountAggregateOutputType | null
+    _avg: AstroDatasetAvgAggregateOutputType | null
+    _sum: AstroDatasetSumAggregateOutputType | null
+    _min: AstroDatasetMinAggregateOutputType | null
+    _max: AstroDatasetMaxAggregateOutputType | null
+  }
+
+  type GetAstroDatasetGroupByPayload<T extends AstroDatasetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AstroDatasetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AstroDatasetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AstroDatasetGroupByOutputType[P]>
+            : GetScalarType<T[P], AstroDatasetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AstroDatasetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    promptTemplate?: boolean
+    history?: boolean
+    toolResult?: boolean
+    userInput?: boolean
+    modelAnswer?: boolean
+    tristanAnswer?: boolean
+    modelScore?: boolean
+    tristanScore?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["astroDataset"]>
+
+  export type AstroDatasetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    promptTemplate?: boolean
+    history?: boolean
+    toolResult?: boolean
+    userInput?: boolean
+    modelAnswer?: boolean
+    tristanAnswer?: boolean
+    modelScore?: boolean
+    tristanScore?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["astroDataset"]>
+
+  export type AstroDatasetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    promptTemplate?: boolean
+    history?: boolean
+    toolResult?: boolean
+    userInput?: boolean
+    modelAnswer?: boolean
+    tristanAnswer?: boolean
+    modelScore?: boolean
+    tristanScore?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["astroDataset"]>
+
+  export type AstroDatasetSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    promptTemplate?: boolean
+    history?: boolean
+    toolResult?: boolean
+    userInput?: boolean
+    modelAnswer?: boolean
+    tristanAnswer?: boolean
+    modelScore?: boolean
+    tristanScore?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AstroDatasetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "promptTemplate" | "history" | "toolResult" | "userInput" | "modelAnswer" | "tristanAnswer" | "modelScore" | "tristanScore" | "createdAt" | "updatedAt", ExtArgs["result"]["astroDataset"]>
+
+  export type $AstroDatasetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AstroDataset"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      promptTemplate: string
+      history: string
+      toolResult: string
+      userInput: string
+      modelAnswer: string
+      tristanAnswer: string | null
+      modelScore: number | null
+      tristanScore: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["astroDataset"]>
+    composites: {}
+  }
+
+  type AstroDatasetGetPayload<S extends boolean | null | undefined | AstroDatasetDefaultArgs> = $Result.GetResult<Prisma.$AstroDatasetPayload, S>
+
+  type AstroDatasetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AstroDatasetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AstroDatasetCountAggregateInputType | true
+    }
+
+  export interface AstroDatasetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AstroDataset'], meta: { name: 'AstroDataset' } }
+    /**
+     * Find zero or one AstroDataset that matches the filter.
+     * @param {AstroDatasetFindUniqueArgs} args - Arguments to find a AstroDataset
+     * @example
+     * // Get one AstroDataset
+     * const astroDataset = await prisma.astroDataset.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AstroDatasetFindUniqueArgs>(args: SelectSubset<T, AstroDatasetFindUniqueArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AstroDataset that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AstroDatasetFindUniqueOrThrowArgs} args - Arguments to find a AstroDataset
+     * @example
+     * // Get one AstroDataset
+     * const astroDataset = await prisma.astroDataset.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AstroDatasetFindUniqueOrThrowArgs>(args: SelectSubset<T, AstroDatasetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AstroDataset that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AstroDatasetFindFirstArgs} args - Arguments to find a AstroDataset
+     * @example
+     * // Get one AstroDataset
+     * const astroDataset = await prisma.astroDataset.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AstroDatasetFindFirstArgs>(args?: SelectSubset<T, AstroDatasetFindFirstArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AstroDataset that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AstroDatasetFindFirstOrThrowArgs} args - Arguments to find a AstroDataset
+     * @example
+     * // Get one AstroDataset
+     * const astroDataset = await prisma.astroDataset.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AstroDatasetFindFirstOrThrowArgs>(args?: SelectSubset<T, AstroDatasetFindFirstOrThrowArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AstroDatasets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AstroDatasetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AstroDatasets
+     * const astroDatasets = await prisma.astroDataset.findMany()
+     * 
+     * // Get first 10 AstroDatasets
+     * const astroDatasets = await prisma.astroDataset.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const astroDatasetWithIdOnly = await prisma.astroDataset.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AstroDatasetFindManyArgs>(args?: SelectSubset<T, AstroDatasetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AstroDataset.
+     * @param {AstroDatasetCreateArgs} args - Arguments to create a AstroDataset.
+     * @example
+     * // Create one AstroDataset
+     * const AstroDataset = await prisma.astroDataset.create({
+     *   data: {
+     *     // ... data to create a AstroDataset
+     *   }
+     * })
+     * 
+     */
+    create<T extends AstroDatasetCreateArgs>(args: SelectSubset<T, AstroDatasetCreateArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AstroDatasets.
+     * @param {AstroDatasetCreateManyArgs} args - Arguments to create many AstroDatasets.
+     * @example
+     * // Create many AstroDatasets
+     * const astroDataset = await prisma.astroDataset.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AstroDatasetCreateManyArgs>(args?: SelectSubset<T, AstroDatasetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AstroDatasets and returns the data saved in the database.
+     * @param {AstroDatasetCreateManyAndReturnArgs} args - Arguments to create many AstroDatasets.
+     * @example
+     * // Create many AstroDatasets
+     * const astroDataset = await prisma.astroDataset.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AstroDatasets and only return the `id`
+     * const astroDatasetWithIdOnly = await prisma.astroDataset.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AstroDatasetCreateManyAndReturnArgs>(args?: SelectSubset<T, AstroDatasetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AstroDataset.
+     * @param {AstroDatasetDeleteArgs} args - Arguments to delete one AstroDataset.
+     * @example
+     * // Delete one AstroDataset
+     * const AstroDataset = await prisma.astroDataset.delete({
+     *   where: {
+     *     // ... filter to delete one AstroDataset
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AstroDatasetDeleteArgs>(args: SelectSubset<T, AstroDatasetDeleteArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AstroDataset.
+     * @param {AstroDatasetUpdateArgs} args - Arguments to update one AstroDataset.
+     * @example
+     * // Update one AstroDataset
+     * const astroDataset = await prisma.astroDataset.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AstroDatasetUpdateArgs>(args: SelectSubset<T, AstroDatasetUpdateArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AstroDatasets.
+     * @param {AstroDatasetDeleteManyArgs} args - Arguments to filter AstroDatasets to delete.
+     * @example
+     * // Delete a few AstroDatasets
+     * const { count } = await prisma.astroDataset.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AstroDatasetDeleteManyArgs>(args?: SelectSubset<T, AstroDatasetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AstroDatasets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AstroDatasetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AstroDatasets
+     * const astroDataset = await prisma.astroDataset.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AstroDatasetUpdateManyArgs>(args: SelectSubset<T, AstroDatasetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AstroDatasets and returns the data updated in the database.
+     * @param {AstroDatasetUpdateManyAndReturnArgs} args - Arguments to update many AstroDatasets.
+     * @example
+     * // Update many AstroDatasets
+     * const astroDataset = await prisma.astroDataset.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AstroDatasets and only return the `id`
+     * const astroDatasetWithIdOnly = await prisma.astroDataset.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AstroDatasetUpdateManyAndReturnArgs>(args: SelectSubset<T, AstroDatasetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AstroDataset.
+     * @param {AstroDatasetUpsertArgs} args - Arguments to update or create a AstroDataset.
+     * @example
+     * // Update or create a AstroDataset
+     * const astroDataset = await prisma.astroDataset.upsert({
+     *   create: {
+     *     // ... data to create a AstroDataset
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AstroDataset we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AstroDatasetUpsertArgs>(args: SelectSubset<T, AstroDatasetUpsertArgs<ExtArgs>>): Prisma__AstroDatasetClient<$Result.GetResult<Prisma.$AstroDatasetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AstroDatasets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AstroDatasetCountArgs} args - Arguments to filter AstroDatasets to count.
+     * @example
+     * // Count the number of AstroDatasets
+     * const count = await prisma.astroDataset.count({
+     *   where: {
+     *     // ... the filter for the AstroDatasets we want to count
+     *   }
+     * })
+    **/
+    count<T extends AstroDatasetCountArgs>(
+      args?: Subset<T, AstroDatasetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AstroDatasetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AstroDataset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AstroDatasetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AstroDatasetAggregateArgs>(args: Subset<T, AstroDatasetAggregateArgs>): Prisma.PrismaPromise<GetAstroDatasetAggregateType<T>>
+
+    /**
+     * Group by AstroDataset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AstroDatasetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AstroDatasetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AstroDatasetGroupByArgs['orderBy'] }
+        : { orderBy?: AstroDatasetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AstroDatasetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAstroDatasetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AstroDataset model
+   */
+  readonly fields: AstroDatasetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AstroDataset.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AstroDatasetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AstroDataset model
+   */
+  interface AstroDatasetFieldRefs {
+    readonly id: FieldRef<"AstroDataset", 'String'>
+    readonly userId: FieldRef<"AstroDataset", 'String'>
+    readonly promptTemplate: FieldRef<"AstroDataset", 'String'>
+    readonly history: FieldRef<"AstroDataset", 'String'>
+    readonly toolResult: FieldRef<"AstroDataset", 'String'>
+    readonly userInput: FieldRef<"AstroDataset", 'String'>
+    readonly modelAnswer: FieldRef<"AstroDataset", 'String'>
+    readonly tristanAnswer: FieldRef<"AstroDataset", 'String'>
+    readonly modelScore: FieldRef<"AstroDataset", 'Float'>
+    readonly tristanScore: FieldRef<"AstroDataset", 'Float'>
+    readonly createdAt: FieldRef<"AstroDataset", 'DateTime'>
+    readonly updatedAt: FieldRef<"AstroDataset", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AstroDataset findUnique
+   */
+  export type AstroDatasetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * Filter, which AstroDataset to fetch.
+     */
+    where: AstroDatasetWhereUniqueInput
+  }
+
+  /**
+   * AstroDataset findUniqueOrThrow
+   */
+  export type AstroDatasetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * Filter, which AstroDataset to fetch.
+     */
+    where: AstroDatasetWhereUniqueInput
+  }
+
+  /**
+   * AstroDataset findFirst
+   */
+  export type AstroDatasetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * Filter, which AstroDataset to fetch.
+     */
+    where?: AstroDatasetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AstroDatasets to fetch.
+     */
+    orderBy?: AstroDatasetOrderByWithRelationInput | AstroDatasetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AstroDatasets.
+     */
+    cursor?: AstroDatasetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AstroDatasets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AstroDatasets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AstroDatasets.
+     */
+    distinct?: AstroDatasetScalarFieldEnum | AstroDatasetScalarFieldEnum[]
+  }
+
+  /**
+   * AstroDataset findFirstOrThrow
+   */
+  export type AstroDatasetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * Filter, which AstroDataset to fetch.
+     */
+    where?: AstroDatasetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AstroDatasets to fetch.
+     */
+    orderBy?: AstroDatasetOrderByWithRelationInput | AstroDatasetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AstroDatasets.
+     */
+    cursor?: AstroDatasetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AstroDatasets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AstroDatasets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AstroDatasets.
+     */
+    distinct?: AstroDatasetScalarFieldEnum | AstroDatasetScalarFieldEnum[]
+  }
+
+  /**
+   * AstroDataset findMany
+   */
+  export type AstroDatasetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * Filter, which AstroDatasets to fetch.
+     */
+    where?: AstroDatasetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AstroDatasets to fetch.
+     */
+    orderBy?: AstroDatasetOrderByWithRelationInput | AstroDatasetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AstroDatasets.
+     */
+    cursor?: AstroDatasetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AstroDatasets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AstroDatasets.
+     */
+    skip?: number
+    distinct?: AstroDatasetScalarFieldEnum | AstroDatasetScalarFieldEnum[]
+  }
+
+  /**
+   * AstroDataset create
+   */
+  export type AstroDatasetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * The data needed to create a AstroDataset.
+     */
+    data: XOR<AstroDatasetCreateInput, AstroDatasetUncheckedCreateInput>
+  }
+
+  /**
+   * AstroDataset createMany
+   */
+  export type AstroDatasetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AstroDatasets.
+     */
+    data: AstroDatasetCreateManyInput | AstroDatasetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AstroDataset createManyAndReturn
+   */
+  export type AstroDatasetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * The data used to create many AstroDatasets.
+     */
+    data: AstroDatasetCreateManyInput | AstroDatasetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AstroDataset update
+   */
+  export type AstroDatasetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * The data needed to update a AstroDataset.
+     */
+    data: XOR<AstroDatasetUpdateInput, AstroDatasetUncheckedUpdateInput>
+    /**
+     * Choose, which AstroDataset to update.
+     */
+    where: AstroDatasetWhereUniqueInput
+  }
+
+  /**
+   * AstroDataset updateMany
+   */
+  export type AstroDatasetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AstroDatasets.
+     */
+    data: XOR<AstroDatasetUpdateManyMutationInput, AstroDatasetUncheckedUpdateManyInput>
+    /**
+     * Filter which AstroDatasets to update
+     */
+    where?: AstroDatasetWhereInput
+    /**
+     * Limit how many AstroDatasets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AstroDataset updateManyAndReturn
+   */
+  export type AstroDatasetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * The data used to update AstroDatasets.
+     */
+    data: XOR<AstroDatasetUpdateManyMutationInput, AstroDatasetUncheckedUpdateManyInput>
+    /**
+     * Filter which AstroDatasets to update
+     */
+    where?: AstroDatasetWhereInput
+    /**
+     * Limit how many AstroDatasets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AstroDataset upsert
+   */
+  export type AstroDatasetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * The filter to search for the AstroDataset to update in case it exists.
+     */
+    where: AstroDatasetWhereUniqueInput
+    /**
+     * In case the AstroDataset found by the `where` argument doesn't exist, create a new AstroDataset with this data.
+     */
+    create: XOR<AstroDatasetCreateInput, AstroDatasetUncheckedCreateInput>
+    /**
+     * In case the AstroDataset was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AstroDatasetUpdateInput, AstroDatasetUncheckedUpdateInput>
+  }
+
+  /**
+   * AstroDataset delete
+   */
+  export type AstroDatasetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+    /**
+     * Filter which AstroDataset to delete.
+     */
+    where: AstroDatasetWhereUniqueInput
+  }
+
+  /**
+   * AstroDataset deleteMany
+   */
+  export type AstroDatasetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AstroDatasets to delete
+     */
+    where?: AstroDatasetWhereInput
+    /**
+     * Limit how many AstroDatasets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AstroDataset without action
+   */
+  export type AstroDatasetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AstroDataset
+     */
+    select?: AstroDatasetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AstroDataset
+     */
+    omit?: AstroDatasetOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4715,6 +5930,24 @@ export namespace Prisma {
   };
 
   export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
+
+
+  export const AstroDatasetScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    promptTemplate: 'promptTemplate',
+    history: 'history',
+    toolResult: 'toolResult',
+    userInput: 'userInput',
+    modelAnswer: 'modelAnswer',
+    tristanAnswer: 'tristanAnswer',
+    modelScore: 'modelScore',
+    tristanScore: 'tristanScore',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AstroDatasetScalarFieldEnum = (typeof AstroDatasetScalarFieldEnum)[keyof typeof AstroDatasetScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5135,6 +6368,95 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ChatMessage"> | Date | string
   }
 
+  export type AstroDatasetWhereInput = {
+    AND?: AstroDatasetWhereInput | AstroDatasetWhereInput[]
+    OR?: AstroDatasetWhereInput[]
+    NOT?: AstroDatasetWhereInput | AstroDatasetWhereInput[]
+    id?: UuidFilter<"AstroDataset"> | string
+    userId?: StringFilter<"AstroDataset"> | string
+    promptTemplate?: StringFilter<"AstroDataset"> | string
+    history?: StringFilter<"AstroDataset"> | string
+    toolResult?: StringFilter<"AstroDataset"> | string
+    userInput?: StringFilter<"AstroDataset"> | string
+    modelAnswer?: StringFilter<"AstroDataset"> | string
+    tristanAnswer?: StringNullableFilter<"AstroDataset"> | string | null
+    modelScore?: FloatNullableFilter<"AstroDataset"> | number | null
+    tristanScore?: FloatNullableFilter<"AstroDataset"> | number | null
+    createdAt?: DateTimeFilter<"AstroDataset"> | Date | string
+    updatedAt?: DateTimeFilter<"AstroDataset"> | Date | string
+  }
+
+  export type AstroDatasetOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    promptTemplate?: SortOrder
+    history?: SortOrder
+    toolResult?: SortOrder
+    userInput?: SortOrder
+    modelAnswer?: SortOrder
+    tristanAnswer?: SortOrderInput | SortOrder
+    modelScore?: SortOrderInput | SortOrder
+    tristanScore?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AstroDatasetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AstroDatasetWhereInput | AstroDatasetWhereInput[]
+    OR?: AstroDatasetWhereInput[]
+    NOT?: AstroDatasetWhereInput | AstroDatasetWhereInput[]
+    userId?: StringFilter<"AstroDataset"> | string
+    promptTemplate?: StringFilter<"AstroDataset"> | string
+    history?: StringFilter<"AstroDataset"> | string
+    toolResult?: StringFilter<"AstroDataset"> | string
+    userInput?: StringFilter<"AstroDataset"> | string
+    modelAnswer?: StringFilter<"AstroDataset"> | string
+    tristanAnswer?: StringNullableFilter<"AstroDataset"> | string | null
+    modelScore?: FloatNullableFilter<"AstroDataset"> | number | null
+    tristanScore?: FloatNullableFilter<"AstroDataset"> | number | null
+    createdAt?: DateTimeFilter<"AstroDataset"> | Date | string
+    updatedAt?: DateTimeFilter<"AstroDataset"> | Date | string
+  }, "id">
+
+  export type AstroDatasetOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    promptTemplate?: SortOrder
+    history?: SortOrder
+    toolResult?: SortOrder
+    userInput?: SortOrder
+    modelAnswer?: SortOrder
+    tristanAnswer?: SortOrderInput | SortOrder
+    modelScore?: SortOrderInput | SortOrder
+    tristanScore?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AstroDatasetCountOrderByAggregateInput
+    _avg?: AstroDatasetAvgOrderByAggregateInput
+    _max?: AstroDatasetMaxOrderByAggregateInput
+    _min?: AstroDatasetMinOrderByAggregateInput
+    _sum?: AstroDatasetSumOrderByAggregateInput
+  }
+
+  export type AstroDatasetScalarWhereWithAggregatesInput = {
+    AND?: AstroDatasetScalarWhereWithAggregatesInput | AstroDatasetScalarWhereWithAggregatesInput[]
+    OR?: AstroDatasetScalarWhereWithAggregatesInput[]
+    NOT?: AstroDatasetScalarWhereWithAggregatesInput | AstroDatasetScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"AstroDataset"> | string
+    userId?: StringWithAggregatesFilter<"AstroDataset"> | string
+    promptTemplate?: StringWithAggregatesFilter<"AstroDataset"> | string
+    history?: StringWithAggregatesFilter<"AstroDataset"> | string
+    toolResult?: StringWithAggregatesFilter<"AstroDataset"> | string
+    userInput?: StringWithAggregatesFilter<"AstroDataset"> | string
+    modelAnswer?: StringWithAggregatesFilter<"AstroDataset"> | string
+    tristanAnswer?: StringNullableWithAggregatesFilter<"AstroDataset"> | string | null
+    modelScore?: FloatNullableWithAggregatesFilter<"AstroDataset"> | number | null
+    tristanScore?: FloatNullableWithAggregatesFilter<"AstroDataset"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"AstroDataset"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AstroDataset"> | Date | string
+  }
+
   export type AstroUserCreateInput = {
     id: string
     birthDate: Date | string
@@ -5426,6 +6748,111 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     messageOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AstroDatasetCreateInput = {
+    id?: string
+    userId: string
+    promptTemplate: string
+    history: string
+    toolResult: string
+    userInput: string
+    modelAnswer: string
+    tristanAnswer?: string | null
+    modelScore?: number | null
+    tristanScore?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AstroDatasetUncheckedCreateInput = {
+    id?: string
+    userId: string
+    promptTemplate: string
+    history: string
+    toolResult: string
+    userInput: string
+    modelAnswer: string
+    tristanAnswer?: string | null
+    modelScore?: number | null
+    tristanScore?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AstroDatasetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    promptTemplate?: StringFieldUpdateOperationsInput | string
+    history?: StringFieldUpdateOperationsInput | string
+    toolResult?: StringFieldUpdateOperationsInput | string
+    userInput?: StringFieldUpdateOperationsInput | string
+    modelAnswer?: StringFieldUpdateOperationsInput | string
+    tristanAnswer?: NullableStringFieldUpdateOperationsInput | string | null
+    modelScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AstroDatasetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    promptTemplate?: StringFieldUpdateOperationsInput | string
+    history?: StringFieldUpdateOperationsInput | string
+    toolResult?: StringFieldUpdateOperationsInput | string
+    userInput?: StringFieldUpdateOperationsInput | string
+    modelAnswer?: StringFieldUpdateOperationsInput | string
+    tristanAnswer?: NullableStringFieldUpdateOperationsInput | string | null
+    modelScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AstroDatasetCreateManyInput = {
+    id?: string
+    userId: string
+    promptTemplate: string
+    history: string
+    toolResult: string
+    userInput: string
+    modelAnswer: string
+    tristanAnswer?: string | null
+    modelScore?: number | null
+    tristanScore?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AstroDatasetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    promptTemplate?: StringFieldUpdateOperationsInput | string
+    history?: StringFieldUpdateOperationsInput | string
+    toolResult?: StringFieldUpdateOperationsInput | string
+    userInput?: StringFieldUpdateOperationsInput | string
+    modelAnswer?: StringFieldUpdateOperationsInput | string
+    tristanAnswer?: NullableStringFieldUpdateOperationsInput | string | null
+    modelScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AstroDatasetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    promptTemplate?: StringFieldUpdateOperationsInput | string
+    history?: StringFieldUpdateOperationsInput | string
+    toolResult?: StringFieldUpdateOperationsInput | string
+    userInput?: StringFieldUpdateOperationsInput | string
+    modelAnswer?: StringFieldUpdateOperationsInput | string
+    tristanAnswer?: NullableStringFieldUpdateOperationsInput | string | null
+    modelScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5905,6 +7332,88 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type AstroDatasetCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    promptTemplate?: SortOrder
+    history?: SortOrder
+    toolResult?: SortOrder
+    userInput?: SortOrder
+    modelAnswer?: SortOrder
+    tristanAnswer?: SortOrder
+    modelScore?: SortOrder
+    tristanScore?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AstroDatasetAvgOrderByAggregateInput = {
+    modelScore?: SortOrder
+    tristanScore?: SortOrder
+  }
+
+  export type AstroDatasetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    promptTemplate?: SortOrder
+    history?: SortOrder
+    toolResult?: SortOrder
+    userInput?: SortOrder
+    modelAnswer?: SortOrder
+    tristanAnswer?: SortOrder
+    modelScore?: SortOrder
+    tristanScore?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AstroDatasetMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    promptTemplate?: SortOrder
+    history?: SortOrder
+    toolResult?: SortOrder
+    userInput?: SortOrder
+    modelAnswer?: SortOrder
+    tristanAnswer?: SortOrder
+    modelScore?: SortOrder
+    tristanScore?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AstroDatasetSumOrderByAggregateInput = {
+    modelScore?: SortOrder
+    tristanScore?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type ChatSessionCreateNestedManyWithoutUserInput = {
     create?: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput> | ChatSessionCreateWithoutUserInput[] | ChatSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatSessionCreateOrConnectWithoutUserInput | ChatSessionCreateOrConnectWithoutUserInput[]
@@ -6063,6 +7572,14 @@ export namespace Prisma {
     upsert?: ChatSessionUpsertWithoutMessagesInput
     connect?: ChatSessionWhereUniqueInput
     update?: XOR<XOR<ChatSessionUpdateToOneWithWhereWithoutMessagesInput, ChatSessionUpdateWithoutMessagesInput>, ChatSessionUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6360,6 +7877,22 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type ChatSessionCreateWithoutUserInput = {

@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { projectPrisma } from "@/lib/project-prisma";
+import clientPromise from "@/lib/mongodb";
 import AstrologyClient from "./client";
 import { AstroUser } from "@/generated/project-client";
 
@@ -17,8 +18,12 @@ export default async function AstrologyPage() {
       id: session.user?.id,
     },
   });
-  if (!astroUser) {
-    redirect("/astrology/create");
-  }
-  return <AstrologyClient session={session} astroUser={astroUser as AstroUser} />;
+  // if (!astroUser) {
+  //   redirect("/astrology/create");
+  // }
+
+  return <AstrologyClient
+    session={session}
+    astroUser={astroUser as AstroUser}
+  />;
 }

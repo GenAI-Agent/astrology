@@ -166,7 +166,7 @@ export function RightPanel({
   const AstroChart = dynamic(() => import('@/components/AstroChart'), { ssr: false });
   const latestChartMessage = useMemo(() => currentChat?.slice().reverse().find((msg): msg is ToolResultMessage =>
     msg.type === "tool_result" &&
-    msg.tool_name === "get_astro_chart_image"
+    msg.tool_name === "get_chart"
   ), [currentChat]);
 
   // Use useRef to track previous chart data and only update when it actually changes

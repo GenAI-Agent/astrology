@@ -104,7 +104,7 @@ export default function ChatSection({
         className={cn(
           "custom-scrollbar relative flex flex-1 flex-col gap-3 overflow-y-auto p-0 transition-all duration-300",
           "px-2 sm:px-4 lg:px-4",
-          isOpen && !isMobileView ? "w-2/3" : "w-full",
+          isOpen && !isMobileView ? "w-3/5" : "w-full",
           className,
         )}
       >
@@ -189,7 +189,7 @@ export default function ChatSection({
           isOpen={isOpen}
           onOpenChange={toggle}
           className="custom-scrollbar py-4"
-          width="w-1/3"
+          width="w-2/5"
           chatHistory={chatHistory}
           currentChat={currentChat}
           selectedMessageId={selectedMessageId}
@@ -199,3 +199,5 @@ export default function ChatSection({
     </>
   );
 }
+//w-[55%]
+//w-[45%]

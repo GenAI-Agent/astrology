@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { User, Pencil } from 'lucide-react';
+import { User, Trash2 } from 'lucide-react';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import AstroInput from '@/components/AstroInput';
 import ProfileEditModal from '@/components/ProfileEditModal';
+import DeleteConfirmModal from '@/components/DeleteConfirmModal';
 import { Session } from 'next-auth';
 import { AstroUser } from '@/generated/project-client';
 import { useChat } from '@/hooks/useChat';
+import { useLensChat } from '@/stores/useLensChat';
 import ChatSection from '@/components/chat/Section';
 import EditableTitle from '@/components/EditableTitle';
 
@@ -22,13 +22,21 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [userProfile, setUserProfile] = useState<any>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  const { deleteLensChatHistory, fetchLensChatHistory, lensChatHistory } = useLensChat();
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetchLensChatHistory(session.user.id, "test");
+    }
+  }, [session?.user?.id, fetchLensChatHistory]);
 
   const {
     handleChat,
     currentChat,
+    setCurrentChat,
     isChatLoading,
     isStreaming,
     handleStopChat,
@@ -41,14 +49,6 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
     apiPath: 'astro_agent',
   });
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   useEffect(() => {
     if (astroUser) {
@@ -75,6 +75,7 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
     }
   }, [session, astroUser]);
 
+
   const handleSaveProfile = async (profileData: any) => {
     try {
       const response = await fetch('/api/astro-user/update', {
@@ -93,7 +94,7 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
         throw new Error('Failed to update profile');
       }
 
-      const result = await response.json();
+      await response.json();
 
       // Update local state
       const updatedProfile = {
@@ -108,6 +109,23 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
     } catch (error) {
       console.error('Error saving profile:', error);
       // Could add toast notification here
+    }
+  };
+
+  const handleDeleteSession = async () => {
+    try {
+      if (!session?.user?.id) {
+        throw new Error('User ID not found');
+      }
+      await deleteLensChatHistory(session.user.id, "test");
+      setCurrentChat([]);
+      // Redirect to home page after deletion
+      // router.push('/');
+    } catch (error) {
+      console.error('Error deleting session:', error);
+      // Could add toast notification here
+    } finally {
+      router.refresh();
     }
   };
 
@@ -127,6 +145,13 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
         </div>
 
         <div className="flex items-center space-x-3">
+          <button
+            onClick={() => setIsDeleteModalOpen(true)}
+            className="p-2 rounded-md hover:bg-red-500/20 transition-colors group"
+            title="刪除對話"
+          >
+            <Trash2 className="w-5 h-5 text-gray-400 group-hover:text-red-500" />
+          </button>
           <div className="flex items-center space-x-2 bg-secondary/50 rounded-full px-3 py-2">
             {session.user?.image ? (
               <img
@@ -150,7 +175,7 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
         <div className="mx-auto flex h-full bg-background w-full flex-1">
           <ChatSection
             isToolPanel={true}
-            chatHistory={[]}
+            chatHistory={lensChatHistory?.messages || []}
             currentChat={currentChat}
             isLoading={isChatLoading || isStreaming}
             isStreaming={isStreaming}
@@ -161,7 +186,7 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
             handleChat={handleChat}
             editableTitle={
               <EditableTitle
-                title={""}
+                title={lensChatHistory?.title || ""}
                 sessionId={"test"}
                 userId={session.user?.id || ""}
                 onTitleUpdate={() => { }}
@@ -267,6 +292,13 @@ export default function AstrologyClient({ session, astroUser }: AstrologyClientP
           birthLocation: userProfile.birthLocation,
           zodiacSign: userProfile.zodiacSign || ''
         } : undefined}
+      />
+
+      {/* Delete Confirm Modal */}
+      <DeleteConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDeleteSession}
       />
     </div>
   );

@@ -161,6 +161,21 @@ exports.Prisma.ChatMessageScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.AstroDatasetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  promptTemplate: 'promptTemplate',
+  history: 'history',
+  toolResult: 'toolResult',
+  userInput: 'userInput',
+  modelAnswer: 'modelAnswer',
+  tristanAnswer: 'tristanAnswer',
+  modelScore: 'modelScore',
+  tristanScore: 'tristanScore',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -201,7 +216,8 @@ exports.MessageType = exports.$Enums.MessageType = {
 exports.Prisma.ModelName = {
   AstroUser: 'AstroUser',
   ChatSession: 'ChatSession',
-  ChatMessage: 'ChatMessage'
+  ChatMessage: 'ChatMessage',
+  AstroDataset: 'AstroDataset'
 };
 
 /**

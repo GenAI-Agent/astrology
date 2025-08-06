@@ -12,7 +12,7 @@ import {
   ChevronUp
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useChatStore } from "@/stores/useChatStore";
+import { useLensChat } from "@/stores/useLensChat";
 import { usePathname, useRouter } from "next/navigation";
 import { FiTrash2 } from "react-icons/fi";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -37,17 +37,17 @@ export default function AstrologySideBar({ className }: SideBarProps) {
   const [currentChatId, setCurrentChatId] = useState("");
   const { data: session, status } = useSession();
   const {
-    chatSessions,
+    lensChatHistories,
     isLoading: isLoadingHistory,
-    fetchAllChatSessions,
-    deleteChatSession
-  } = useChatStore();
+    fetchAllLensChatHistory,
+    deleteLensChatHistory
+  } = useLensChat();
 
   useEffect(() => {
     if (session?.user?.id) {
-      fetchAllChatSessions(session.user.id);
+      fetchAllLensChatHistory(session.user.id);
     }
-  }, [session?.user?.id, fetchAllChatSessions]);
+  }, [session?.user?.id, fetchAllLensChatHistory]);
 
   const menuItems = [
     {
@@ -68,7 +68,7 @@ export default function AstrologySideBar({ className }: SideBarProps) {
   const handleDeleteChat = async (e: React.MouseEvent, sessionId: string) => {
     e.stopPropagation();
     if (session?.user?.id) {
-      await deleteChatSession(session.user.id, sessionId);
+      await deleteLensChatHistory(session.user.id, sessionId);
       // 如果正在查看被刪除的聊天，則重定向到主頁
       if (sessionId === url.split("/").pop()) {
         router.push(`/chat`);
@@ -200,8 +200,8 @@ export default function AstrologySideBar({ className }: SideBarProps) {
                             <div className="animate-spin rounded-full h-3 w-3 border-b border-primary"></div>
                             <span>Loading chat history...</span>
                           </div>
-                        ) : chatSessions.length > 0 ? (
-                          chatSessions.map((chat) => (
+                        ) : lensChatHistories.length > 0 ? (
+                          lensChatHistories.map((chat) => (
                             <div
                               onClick={() => {
                                 router.push(`/chat/p/${chat.sessionId}`);
@@ -407,7 +407,7 @@ export default function AstrologySideBar({ className }: SideBarProps) {
               className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => setIsMobileSidebarOpen(false)}
             >
-              <Image src="/Astro_L.svg" alt="Astro Lens" width={32} height={32} className="w-6 h-6" />
+              <Image src="/logo/AstroFullLogoLightPurple.svg" alt="Astro Lens" width={100} height={100} className="h-8 w-auto cursor-pointer hover:opacity-90 transition-opacity" />
               <span className="text-nowrap font-serif text-lg font-bold uppercase text-secondary-foreground">
                 Astro Lens
               </span>
@@ -456,8 +456,8 @@ export default function AstrologySideBar({ className }: SideBarProps) {
                             <div className="animate-spin rounded-full h-3 w-3 border-b border-primary"></div>
                             <span>Loading chat history...</span>
                           </div>
-                        ) : chatSessions.length > 0 ? (
-                          chatSessions.map((chat) => (
+                        ) : lensChatHistories.length > 0 ? (
+                          lensChatHistories.map((chat) => (
                             <div
                               onClick={() => {
                                 router.push(`/chat/p/${chat.sessionId}`);

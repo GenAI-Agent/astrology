@@ -1,13 +1,11 @@
 import LoadingText from "@/components/LoadingText";
 import { auth } from "@/auth";
 import { Suspense } from "react";
-import { PrismaClient } from '@/generated/project-client';
+import clientPromise from "@/lib/mongodb";
 import { SessionHistory } from "@/types/Message";
 import AstrologyClient from "./client";
 import { UserData } from "@/types/User";
 import { Message } from "@/types/Message";
-
-const prisma = new PrismaClient();
 
 export default async function Page({
   params,
@@ -29,62 +27,29 @@ export default async function Page({
       );
     }
 
-    // Try to get chat history from PostgreSQL, but don't force it to exist here
+    // Try to get chat history from MongoDB
     try {
-      const chatSession = await prisma.chatSession.findFirst({
-        where: {
-          sessionId: sessionId,
-          userId: user.id,
-        },
-        include: {
-          messages: {
-            orderBy: {
-              messageOrder: 'asc'
-            }
-          }
-        }
+      const client = await clientPromise;
+      const db = client.db("Lens");
+      
+      const mongoHistory = await db.collection("User_History_Astro").findOne({
+        userId: user.id,
+        sessionId: sessionId
       });
 
-      if (chatSession) {
-        const messages = chatSession.messages.map(msg => ({
-          id: msg.id,
-          role: msg.role,
-          content: msg.content,
-          type: msg.messageType,
-          messageOrder: msg.messageOrder,
-          createdAt: msg.createdAt,
-          score: msg.score,
-          note: msg.note,
-          // Tool-related fields
-          ...(msg.toolId && {
-            tool_id: msg.toolId,
-            tool_name: msg.toolName,
-            tool_args: msg.toolArgs,
-            tool_result: msg.toolResult
-          }),
-          // Text-related fields
-          ...(msg.sources && { sources: msg.sources }),
-          ...(msg.prompts && { prompts: msg.prompts }),
-          // choose_agent related fields
-          ...(msg.messageType === 'choose_agent' && {
-            agent: (msg.toolArgs as any)?.agent || ''
-          })
-        }));
-
+      if (mongoHistory) {
         chatHistory = {
-          sessionId: chatSession.sessionId,
-          userId: chatSession.userId,
-          title: chatSession.title,
-          messages: messages as Message[],
-          createdAt: chatSession.createdAt,
-          updatedAt: chatSession.updatedAt
+          sessionId: mongoHistory.sessionId,
+          userId: mongoHistory.userId,
+          title: mongoHistory.title || "",
+          messages: mongoHistory.messages || [],
+          createdAt: mongoHistory.createdAt || new Date(),
+          updatedAt: mongoHistory.updatedAt || new Date()
         };
       }
     } catch (error) {
-      console.error("Failed to get chat history:", error);
+      console.error("Failed to get chat history from MongoDB:", error);
       chatHistory = null;
-    } finally {
-      await prisma.$disconnect();
     }
 
     // Note: Even if chatHistory is not found, don't redirect

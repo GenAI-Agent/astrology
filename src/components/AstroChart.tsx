@@ -159,7 +159,7 @@ export default function AstroChart({
     <div className={`flex items-center justify-center ${className}`}>
       <div
         id={id}
-        className="w-full max-w-lg"
+        className="w-full flex justify-center max-w-lg"
         style={{ minHeight: `${height}px` }}
       >
         {mounted && !chartLoaded && (

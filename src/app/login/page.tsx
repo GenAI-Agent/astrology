@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react";
+import Image from 'next/image';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -77,7 +78,7 @@ export default function LoginPage() {
       <div className="relative z-10 w-full max-w-md p-8 bg-card rounded-2xl shadow-xl border border-border">
         <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center mb-4">
-            <img src="/Astro_L.svg" alt="Astro Lens" className="h-16 w-auto" />
+            <Image src="/logo/AstroFullLogoLightPurple.svg" alt="Astro Lens" width={100} height={100} className="h-8 w-auto cursor-pointer hover:opacity-90 transition-opacity" />
           </div>
           <h1 className="text-3xl font-serif mb-2">Welcome Back</h1>
           <p className="text-muted-foreground">Sign in to explore your cosmic journey</p>
