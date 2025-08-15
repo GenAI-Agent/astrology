@@ -11,7 +11,8 @@ interface TrainingDataLayoutProps {
 
 const AUTHORIZED_USER_IDS = [
   'cmag7l9w20000qkqv6vhags4b',
-  'cma8q2cq50000atkba9nupkeh'
+  'cma8q2cq50000atkba9nupkeh',
+  'cme0toh820000pjddidf7icv4'
 ];
 
 export default function TrainingDataLayout({ children }: TrainingDataLayoutProps) {
@@ -20,7 +21,7 @@ export default function TrainingDataLayout({ children }: TrainingDataLayoutProps
 
   useEffect(() => {
     if (status === 'loading') return;
-    
+
     if (status === 'unauthenticated') {
       router.push('/login?callbackUrl=/training-data');
       return;

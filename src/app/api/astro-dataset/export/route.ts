@@ -64,6 +64,40 @@ export async function POST(request: NextRequest) {
           "Content-Disposition": `attachment; filename="astro_dataset_export_${new Date().toISOString()}.csv"`,
         },
       });
+    } else if (format === "jsonl") {
+      // Convert to JSONL format (one JSON object per line)
+      const jsonlContent = datasets
+        .map((dataset) => {
+          // Ensure all string fields are properly handled
+          const cleanData = {
+            id: dataset.id,
+            promptTemplate: dataset.promptTemplate || "",
+            history: dataset.history || "",
+            toolResult: dataset.toolResult || "",
+            userInput: dataset.userInput || "",
+            modelAnswer: dataset.modelAnswer || "",
+            tristanAnswer: dataset.tristanAnswer || "",
+            modelScore: dataset.modelScore || null,
+            tristanScore: dataset.tristanScore || null,
+            createdAt: dataset.createdAt.toISOString(),
+            updatedAt: dataset.updatedAt.toISOString(),
+          };
+          
+          // Use JSON.stringify to ensure proper escaping
+          // This will handle all special characters, newlines, etc.
+          return JSON.stringify(cleanData);
+        })
+        .join("\n");
+
+      // Add a final newline for proper JSONL format
+      const finalContent = jsonlContent + (jsonlContent ? "\n" : "");
+
+      return new NextResponse(finalContent, {
+        headers: {
+          "Content-Type": "application/x-ndjson",
+          "Content-Disposition": `attachment; filename="astro_dataset_export_${new Date().toISOString()}.jsonl"`,
+        },
+      });
     }
 
     // Default to JSON format

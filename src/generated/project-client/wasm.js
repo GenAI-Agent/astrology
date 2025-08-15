@@ -163,7 +163,6 @@ exports.Prisma.ChatMessageScalarFieldEnum = {
 
 exports.Prisma.AstroDatasetScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   promptTemplate: 'promptTemplate',
   history: 'history',
   toolResult: 'toolResult',
@@ -173,7 +172,8 @@ exports.Prisma.AstroDatasetScalarFieldEnum = {
   modelScore: 'modelScore',
   tristanScore: 'tristanScore',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {

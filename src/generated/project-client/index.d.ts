@@ -2601,8 +2601,8 @@ export namespace Prisma {
     title?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | AstroUserDefaultArgs<ExtArgs>
     messages?: boolean | ChatSession$messagesArgs<ExtArgs>
+    user?: boolean | AstroUserDefaultArgs<ExtArgs>
     _count?: boolean | ChatSessionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chatSession"]>
 
@@ -2637,8 +2637,8 @@ export namespace Prisma {
 
   export type ChatSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "userId" | "title" | "createdAt" | "updatedAt", ExtArgs["result"]["chatSession"]>
   export type ChatSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | AstroUserDefaultArgs<ExtArgs>
     messages?: boolean | ChatSession$messagesArgs<ExtArgs>
+    user?: boolean | AstroUserDefaultArgs<ExtArgs>
     _count?: boolean | ChatSessionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ChatSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2651,8 +2651,8 @@ export namespace Prisma {
   export type $ChatSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ChatSession"
     objects: {
-      user: Prisma.$AstroUserPayload<ExtArgs>
       messages: Prisma.$ChatMessagePayload<ExtArgs>[]
+      user: Prisma.$AstroUserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3055,8 +3055,8 @@ export namespace Prisma {
    */
   export interface Prisma__ChatSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends AstroUserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AstroUserDefaultArgs<ExtArgs>>): Prisma__AstroUserClient<$Result.GetResult<Prisma.$AstroUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     messages<T extends ChatSession$messagesArgs<ExtArgs> = {}>(args?: Subset<T, ChatSession$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends AstroUserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AstroUserDefaultArgs<ExtArgs>>): Prisma__AstroUserClient<$Result.GetResult<Prisma.$AstroUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4768,7 +4768,6 @@ export namespace Prisma {
 
   export type AstroDatasetMinAggregateOutputType = {
     id: string | null
-    userId: string | null
     promptTemplate: string | null
     history: string | null
     toolResult: string | null
@@ -4779,11 +4778,11 @@ export namespace Prisma {
     tristanScore: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type AstroDatasetMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
     promptTemplate: string | null
     history: string | null
     toolResult: string | null
@@ -4794,11 +4793,11 @@ export namespace Prisma {
     tristanScore: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type AstroDatasetCountAggregateOutputType = {
     id: number
-    userId: number
     promptTemplate: number
     history: number
     toolResult: number
@@ -4809,6 +4808,7 @@ export namespace Prisma {
     tristanScore: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -4825,7 +4825,6 @@ export namespace Prisma {
 
   export type AstroDatasetMinAggregateInputType = {
     id?: true
-    userId?: true
     promptTemplate?: true
     history?: true
     toolResult?: true
@@ -4836,11 +4835,11 @@ export namespace Prisma {
     tristanScore?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type AstroDatasetMaxAggregateInputType = {
     id?: true
-    userId?: true
     promptTemplate?: true
     history?: true
     toolResult?: true
@@ -4851,11 +4850,11 @@ export namespace Prisma {
     tristanScore?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type AstroDatasetCountAggregateInputType = {
     id?: true
-    userId?: true
     promptTemplate?: true
     history?: true
     toolResult?: true
@@ -4866,6 +4865,7 @@ export namespace Prisma {
     tristanScore?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -4957,7 +4957,6 @@ export namespace Prisma {
 
   export type AstroDatasetGroupByOutputType = {
     id: string
-    userId: string
     promptTemplate: string
     history: string
     toolResult: string
@@ -4968,6 +4967,7 @@ export namespace Prisma {
     tristanScore: number | null
     createdAt: Date
     updatedAt: Date
+    userId: string
     _count: AstroDatasetCountAggregateOutputType | null
     _avg: AstroDatasetAvgAggregateOutputType | null
     _sum: AstroDatasetSumAggregateOutputType | null
@@ -4991,7 +4991,6 @@ export namespace Prisma {
 
   export type AstroDatasetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     promptTemplate?: boolean
     history?: boolean
     toolResult?: boolean
@@ -5002,11 +5001,11 @@ export namespace Prisma {
     tristanScore?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }, ExtArgs["result"]["astroDataset"]>
 
   export type AstroDatasetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     promptTemplate?: boolean
     history?: boolean
     toolResult?: boolean
@@ -5017,11 +5016,11 @@ export namespace Prisma {
     tristanScore?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }, ExtArgs["result"]["astroDataset"]>
 
   export type AstroDatasetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     promptTemplate?: boolean
     history?: boolean
     toolResult?: boolean
@@ -5032,11 +5031,11 @@ export namespace Prisma {
     tristanScore?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }, ExtArgs["result"]["astroDataset"]>
 
   export type AstroDatasetSelectScalar = {
     id?: boolean
-    userId?: boolean
     promptTemplate?: boolean
     history?: boolean
     toolResult?: boolean
@@ -5047,16 +5046,16 @@ export namespace Prisma {
     tristanScore?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type AstroDatasetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "promptTemplate" | "history" | "toolResult" | "userInput" | "modelAnswer" | "tristanAnswer" | "modelScore" | "tristanScore" | "createdAt" | "updatedAt", ExtArgs["result"]["astroDataset"]>
+  export type AstroDatasetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "promptTemplate" | "history" | "toolResult" | "userInput" | "modelAnswer" | "tristanAnswer" | "modelScore" | "tristanScore" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["astroDataset"]>
 
   export type $AstroDatasetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AstroDataset"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
       promptTemplate: string
       history: string
       toolResult: string
@@ -5067,6 +5066,7 @@ export namespace Prisma {
       tristanScore: number | null
       createdAt: Date
       updatedAt: Date
+      userId: string
     }, ExtArgs["result"]["astroDataset"]>
     composites: {}
   }
@@ -5491,7 +5491,6 @@ export namespace Prisma {
    */
   interface AstroDatasetFieldRefs {
     readonly id: FieldRef<"AstroDataset", 'String'>
-    readonly userId: FieldRef<"AstroDataset", 'String'>
     readonly promptTemplate: FieldRef<"AstroDataset", 'String'>
     readonly history: FieldRef<"AstroDataset", 'String'>
     readonly toolResult: FieldRef<"AstroDataset", 'String'>
@@ -5502,6 +5501,7 @@ export namespace Prisma {
     readonly tristanScore: FieldRef<"AstroDataset", 'Float'>
     readonly createdAt: FieldRef<"AstroDataset", 'DateTime'>
     readonly updatedAt: FieldRef<"AstroDataset", 'DateTime'>
+    readonly userId: FieldRef<"AstroDataset", 'String'>
   }
     
 
@@ -5934,7 +5934,6 @@ export namespace Prisma {
 
   export const AstroDatasetScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
     promptTemplate: 'promptTemplate',
     history: 'history',
     toolResult: 'toolResult',
@@ -5944,7 +5943,8 @@ export namespace Prisma {
     modelScore: 'modelScore',
     tristanScore: 'tristanScore',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type AstroDatasetScalarFieldEnum = (typeof AstroDatasetScalarFieldEnum)[keyof typeof AstroDatasetScalarFieldEnum]
@@ -6208,8 +6208,8 @@ export namespace Prisma {
     title?: StringFilter<"ChatSession"> | string
     createdAt?: DateTimeFilter<"ChatSession"> | Date | string
     updatedAt?: DateTimeFilter<"ChatSession"> | Date | string
-    user?: XOR<AstroUserScalarRelationFilter, AstroUserWhereInput>
     messages?: ChatMessageListRelationFilter
+    user?: XOR<AstroUserScalarRelationFilter, AstroUserWhereInput>
   }
 
   export type ChatSessionOrderByWithRelationInput = {
@@ -6219,8 +6219,8 @@ export namespace Prisma {
     title?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: AstroUserOrderByWithRelationInput
     messages?: ChatMessageOrderByRelationAggregateInput
+    user?: AstroUserOrderByWithRelationInput
   }
 
   export type ChatSessionWhereUniqueInput = Prisma.AtLeast<{
@@ -6233,8 +6233,8 @@ export namespace Prisma {
     title?: StringFilter<"ChatSession"> | string
     createdAt?: DateTimeFilter<"ChatSession"> | Date | string
     updatedAt?: DateTimeFilter<"ChatSession"> | Date | string
-    user?: XOR<AstroUserScalarRelationFilter, AstroUserWhereInput>
     messages?: ChatMessageListRelationFilter
+    user?: XOR<AstroUserScalarRelationFilter, AstroUserWhereInput>
   }, "id" | "sessionId">
 
   export type ChatSessionOrderByWithAggregationInput = {
@@ -6373,7 +6373,6 @@ export namespace Prisma {
     OR?: AstroDatasetWhereInput[]
     NOT?: AstroDatasetWhereInput | AstroDatasetWhereInput[]
     id?: UuidFilter<"AstroDataset"> | string
-    userId?: StringFilter<"AstroDataset"> | string
     promptTemplate?: StringFilter<"AstroDataset"> | string
     history?: StringFilter<"AstroDataset"> | string
     toolResult?: StringFilter<"AstroDataset"> | string
@@ -6384,11 +6383,11 @@ export namespace Prisma {
     tristanScore?: FloatNullableFilter<"AstroDataset"> | number | null
     createdAt?: DateTimeFilter<"AstroDataset"> | Date | string
     updatedAt?: DateTimeFilter<"AstroDataset"> | Date | string
+    userId?: StringFilter<"AstroDataset"> | string
   }
 
   export type AstroDatasetOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
     promptTemplate?: SortOrder
     history?: SortOrder
     toolResult?: SortOrder
@@ -6399,6 +6398,7 @@ export namespace Prisma {
     tristanScore?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AstroDatasetWhereUniqueInput = Prisma.AtLeast<{
@@ -6406,7 +6406,6 @@ export namespace Prisma {
     AND?: AstroDatasetWhereInput | AstroDatasetWhereInput[]
     OR?: AstroDatasetWhereInput[]
     NOT?: AstroDatasetWhereInput | AstroDatasetWhereInput[]
-    userId?: StringFilter<"AstroDataset"> | string
     promptTemplate?: StringFilter<"AstroDataset"> | string
     history?: StringFilter<"AstroDataset"> | string
     toolResult?: StringFilter<"AstroDataset"> | string
@@ -6417,11 +6416,11 @@ export namespace Prisma {
     tristanScore?: FloatNullableFilter<"AstroDataset"> | number | null
     createdAt?: DateTimeFilter<"AstroDataset"> | Date | string
     updatedAt?: DateTimeFilter<"AstroDataset"> | Date | string
+    userId?: StringFilter<"AstroDataset"> | string
   }, "id">
 
   export type AstroDatasetOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
     promptTemplate?: SortOrder
     history?: SortOrder
     toolResult?: SortOrder
@@ -6432,6 +6431,7 @@ export namespace Prisma {
     tristanScore?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     _count?: AstroDatasetCountOrderByAggregateInput
     _avg?: AstroDatasetAvgOrderByAggregateInput
     _max?: AstroDatasetMaxOrderByAggregateInput
@@ -6444,7 +6444,6 @@ export namespace Prisma {
     OR?: AstroDatasetScalarWhereWithAggregatesInput[]
     NOT?: AstroDatasetScalarWhereWithAggregatesInput | AstroDatasetScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"AstroDataset"> | string
-    userId?: StringWithAggregatesFilter<"AstroDataset"> | string
     promptTemplate?: StringWithAggregatesFilter<"AstroDataset"> | string
     history?: StringWithAggregatesFilter<"AstroDataset"> | string
     toolResult?: StringWithAggregatesFilter<"AstroDataset"> | string
@@ -6455,6 +6454,7 @@ export namespace Prisma {
     tristanScore?: FloatNullableWithAggregatesFilter<"AstroDataset"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"AstroDataset"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AstroDataset"> | Date | string
+    userId?: StringWithAggregatesFilter<"AstroDataset"> | string
   }
 
   export type AstroUserCreateInput = {
@@ -6565,8 +6565,8 @@ export namespace Prisma {
     title: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: AstroUserCreateNestedOneWithoutChatSessionsInput
     messages?: ChatMessageCreateNestedManyWithoutSessionInput
+    user: AstroUserCreateNestedOneWithoutChatSessionsInput
   }
 
   export type ChatSessionUncheckedCreateInput = {
@@ -6585,8 +6585,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: AstroUserUpdateOneRequiredWithoutChatSessionsNestedInput
     messages?: ChatMessageUpdateManyWithoutSessionNestedInput
+    user?: AstroUserUpdateOneRequiredWithoutChatSessionsNestedInput
   }
 
   export type ChatSessionUncheckedUpdateInput = {
@@ -6752,7 +6752,6 @@ export namespace Prisma {
 
   export type AstroDatasetCreateInput = {
     id?: string
-    userId: string
     promptTemplate: string
     history: string
     toolResult: string
@@ -6763,11 +6762,11 @@ export namespace Prisma {
     tristanScore?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type AstroDatasetUncheckedCreateInput = {
     id?: string
-    userId: string
     promptTemplate: string
     history: string
     toolResult: string
@@ -6778,11 +6777,11 @@ export namespace Prisma {
     tristanScore?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type AstroDatasetUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     promptTemplate?: StringFieldUpdateOperationsInput | string
     history?: StringFieldUpdateOperationsInput | string
     toolResult?: StringFieldUpdateOperationsInput | string
@@ -6793,11 +6792,11 @@ export namespace Prisma {
     tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AstroDatasetUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     promptTemplate?: StringFieldUpdateOperationsInput | string
     history?: StringFieldUpdateOperationsInput | string
     toolResult?: StringFieldUpdateOperationsInput | string
@@ -6808,11 +6807,11 @@ export namespace Prisma {
     tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AstroDatasetCreateManyInput = {
     id?: string
-    userId: string
     promptTemplate: string
     history: string
     toolResult: string
@@ -6823,11 +6822,11 @@ export namespace Prisma {
     tristanScore?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type AstroDatasetUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     promptTemplate?: StringFieldUpdateOperationsInput | string
     history?: StringFieldUpdateOperationsInput | string
     toolResult?: StringFieldUpdateOperationsInput | string
@@ -6838,11 +6837,11 @@ export namespace Prisma {
     tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AstroDatasetUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     promptTemplate?: StringFieldUpdateOperationsInput | string
     history?: StringFieldUpdateOperationsInput | string
     toolResult?: StringFieldUpdateOperationsInput | string
@@ -6853,6 +6852,7 @@ export namespace Prisma {
     tristanScore?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7124,15 +7124,15 @@ export namespace Prisma {
     not?: NestedUuidFilter<$PrismaModel> | string
   }
 
-  export type AstroUserScalarRelationFilter = {
-    is?: AstroUserWhereInput
-    isNot?: AstroUserWhereInput
-  }
-
   export type ChatMessageListRelationFilter = {
     every?: ChatMessageWhereInput
     some?: ChatMessageWhereInput
     none?: ChatMessageWhereInput
+  }
+
+  export type AstroUserScalarRelationFilter = {
+    is?: AstroUserWhereInput
+    isNot?: AstroUserWhereInput
   }
 
   export type ChatMessageOrderByRelationAggregateInput = {
@@ -7345,7 +7345,6 @@ export namespace Prisma {
 
   export type AstroDatasetCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     promptTemplate?: SortOrder
     history?: SortOrder
     toolResult?: SortOrder
@@ -7356,6 +7355,7 @@ export namespace Prisma {
     tristanScore?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AstroDatasetAvgOrderByAggregateInput = {
@@ -7365,7 +7365,6 @@ export namespace Prisma {
 
   export type AstroDatasetMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     promptTemplate?: SortOrder
     history?: SortOrder
     toolResult?: SortOrder
@@ -7376,11 +7375,11 @@ export namespace Prisma {
     tristanScore?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AstroDatasetMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     promptTemplate?: SortOrder
     history?: SortOrder
     toolResult?: SortOrder
@@ -7391,6 +7390,7 @@ export namespace Prisma {
     tristanScore?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AstroDatasetSumOrderByAggregateInput = {
@@ -7480,12 +7480,6 @@ export namespace Prisma {
     deleteMany?: ChatSessionScalarWhereInput | ChatSessionScalarWhereInput[]
   }
 
-  export type AstroUserCreateNestedOneWithoutChatSessionsInput = {
-    create?: XOR<AstroUserCreateWithoutChatSessionsInput, AstroUserUncheckedCreateWithoutChatSessionsInput>
-    connectOrCreate?: AstroUserCreateOrConnectWithoutChatSessionsInput
-    connect?: AstroUserWhereUniqueInput
-  }
-
   export type ChatMessageCreateNestedManyWithoutSessionInput = {
     create?: XOR<ChatMessageCreateWithoutSessionInput, ChatMessageUncheckedCreateWithoutSessionInput> | ChatMessageCreateWithoutSessionInput[] | ChatMessageUncheckedCreateWithoutSessionInput[]
     connectOrCreate?: ChatMessageCreateOrConnectWithoutSessionInput | ChatMessageCreateOrConnectWithoutSessionInput[]
@@ -7493,19 +7487,17 @@ export namespace Prisma {
     connect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
   }
 
+  export type AstroUserCreateNestedOneWithoutChatSessionsInput = {
+    create?: XOR<AstroUserCreateWithoutChatSessionsInput, AstroUserUncheckedCreateWithoutChatSessionsInput>
+    connectOrCreate?: AstroUserCreateOrConnectWithoutChatSessionsInput
+    connect?: AstroUserWhereUniqueInput
+  }
+
   export type ChatMessageUncheckedCreateNestedManyWithoutSessionInput = {
     create?: XOR<ChatMessageCreateWithoutSessionInput, ChatMessageUncheckedCreateWithoutSessionInput> | ChatMessageCreateWithoutSessionInput[] | ChatMessageUncheckedCreateWithoutSessionInput[]
     connectOrCreate?: ChatMessageCreateOrConnectWithoutSessionInput | ChatMessageCreateOrConnectWithoutSessionInput[]
     createMany?: ChatMessageCreateManySessionInputEnvelope
     connect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-  }
-
-  export type AstroUserUpdateOneRequiredWithoutChatSessionsNestedInput = {
-    create?: XOR<AstroUserCreateWithoutChatSessionsInput, AstroUserUncheckedCreateWithoutChatSessionsInput>
-    connectOrCreate?: AstroUserCreateOrConnectWithoutChatSessionsInput
-    upsert?: AstroUserUpsertWithoutChatSessionsInput
-    connect?: AstroUserWhereUniqueInput
-    update?: XOR<XOR<AstroUserUpdateToOneWithWhereWithoutChatSessionsInput, AstroUserUpdateWithoutChatSessionsInput>, AstroUserUncheckedUpdateWithoutChatSessionsInput>
   }
 
   export type ChatMessageUpdateManyWithoutSessionNestedInput = {
@@ -7520,6 +7512,14 @@ export namespace Prisma {
     update?: ChatMessageUpdateWithWhereUniqueWithoutSessionInput | ChatMessageUpdateWithWhereUniqueWithoutSessionInput[]
     updateMany?: ChatMessageUpdateManyWithWhereWithoutSessionInput | ChatMessageUpdateManyWithWhereWithoutSessionInput[]
     deleteMany?: ChatMessageScalarWhereInput | ChatMessageScalarWhereInput[]
+  }
+
+  export type AstroUserUpdateOneRequiredWithoutChatSessionsNestedInput = {
+    create?: XOR<AstroUserCreateWithoutChatSessionsInput, AstroUserUncheckedCreateWithoutChatSessionsInput>
+    connectOrCreate?: AstroUserCreateOrConnectWithoutChatSessionsInput
+    upsert?: AstroUserUpsertWithoutChatSessionsInput
+    connect?: AstroUserWhereUniqueInput
+    update?: XOR<XOR<AstroUserUpdateToOneWithWhereWithoutChatSessionsInput, AstroUserUpdateWithoutChatSessionsInput>, AstroUserUncheckedUpdateWithoutChatSessionsInput>
   }
 
   export type ChatMessageUncheckedUpdateManyWithoutSessionNestedInput = {
@@ -7951,39 +7951,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ChatSession"> | Date | string
   }
 
-  export type AstroUserCreateWithoutChatSessionsInput = {
-    id: string
-    birthDate: Date | string
-    birthTime?: Date | string | null
-    birthLocation: string
-    latitude?: Decimal | DecimalJsLike | number | string | null
-    longitude?: Decimal | DecimalJsLike | number | string | null
-    timezone?: string | null
-    todayDivination?: NullableJsonNullValueInput | InputJsonValue
-    divinationDate?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AstroUserUncheckedCreateWithoutChatSessionsInput = {
-    id: string
-    birthDate: Date | string
-    birthTime?: Date | string | null
-    birthLocation: string
-    latitude?: Decimal | DecimalJsLike | number | string | null
-    longitude?: Decimal | DecimalJsLike | number | string | null
-    timezone?: string | null
-    todayDivination?: NullableJsonNullValueInput | InputJsonValue
-    divinationDate?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AstroUserCreateOrConnectWithoutChatSessionsInput = {
-    where: AstroUserWhereUniqueInput
-    create: XOR<AstroUserCreateWithoutChatSessionsInput, AstroUserUncheckedCreateWithoutChatSessionsInput>
-  }
-
   export type ChatMessageCreateWithoutSessionInput = {
     id?: string
     role: $Enums.Role
@@ -8028,43 +7995,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AstroUserUpsertWithoutChatSessionsInput = {
-    update: XOR<AstroUserUpdateWithoutChatSessionsInput, AstroUserUncheckedUpdateWithoutChatSessionsInput>
+  export type AstroUserCreateWithoutChatSessionsInput = {
+    id: string
+    birthDate: Date | string
+    birthTime?: Date | string | null
+    birthLocation: string
+    latitude?: Decimal | DecimalJsLike | number | string | null
+    longitude?: Decimal | DecimalJsLike | number | string | null
+    timezone?: string | null
+    todayDivination?: NullableJsonNullValueInput | InputJsonValue
+    divinationDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AstroUserUncheckedCreateWithoutChatSessionsInput = {
+    id: string
+    birthDate: Date | string
+    birthTime?: Date | string | null
+    birthLocation: string
+    latitude?: Decimal | DecimalJsLike | number | string | null
+    longitude?: Decimal | DecimalJsLike | number | string | null
+    timezone?: string | null
+    todayDivination?: NullableJsonNullValueInput | InputJsonValue
+    divinationDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AstroUserCreateOrConnectWithoutChatSessionsInput = {
+    where: AstroUserWhereUniqueInput
     create: XOR<AstroUserCreateWithoutChatSessionsInput, AstroUserUncheckedCreateWithoutChatSessionsInput>
-    where?: AstroUserWhereInput
-  }
-
-  export type AstroUserUpdateToOneWithWhereWithoutChatSessionsInput = {
-    where?: AstroUserWhereInput
-    data: XOR<AstroUserUpdateWithoutChatSessionsInput, AstroUserUncheckedUpdateWithoutChatSessionsInput>
-  }
-
-  export type AstroUserUpdateWithoutChatSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    birthLocation?: StringFieldUpdateOperationsInput | string
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    timezone?: NullableStringFieldUpdateOperationsInput | string | null
-    todayDivination?: NullableJsonNullValueInput | InputJsonValue
-    divinationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AstroUserUncheckedUpdateWithoutChatSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    birthLocation?: StringFieldUpdateOperationsInput | string
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    timezone?: NullableStringFieldUpdateOperationsInput | string | null
-    todayDivination?: NullableJsonNullValueInput | InputJsonValue
-    divinationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ChatMessageUpsertWithWhereUniqueWithoutSessionInput = {
@@ -8102,6 +8063,45 @@ export namespace Prisma {
     note?: StringNullableFilter<"ChatMessage"> | string | null
     messageOrder?: IntFilter<"ChatMessage"> | number
     createdAt?: DateTimeFilter<"ChatMessage"> | Date | string
+  }
+
+  export type AstroUserUpsertWithoutChatSessionsInput = {
+    update: XOR<AstroUserUpdateWithoutChatSessionsInput, AstroUserUncheckedUpdateWithoutChatSessionsInput>
+    create: XOR<AstroUserCreateWithoutChatSessionsInput, AstroUserUncheckedCreateWithoutChatSessionsInput>
+    where?: AstroUserWhereInput
+  }
+
+  export type AstroUserUpdateToOneWithWhereWithoutChatSessionsInput = {
+    where?: AstroUserWhereInput
+    data: XOR<AstroUserUpdateWithoutChatSessionsInput, AstroUserUncheckedUpdateWithoutChatSessionsInput>
+  }
+
+  export type AstroUserUpdateWithoutChatSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthLocation?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    todayDivination?: NullableJsonNullValueInput | InputJsonValue
+    divinationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AstroUserUncheckedUpdateWithoutChatSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    birthLocation?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    todayDivination?: NullableJsonNullValueInput | InputJsonValue
+    divinationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ChatSessionCreateWithoutMessagesInput = {

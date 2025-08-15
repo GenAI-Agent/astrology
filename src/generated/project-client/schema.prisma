@@ -9,36 +9,32 @@ datasource db {
 }
 
 model AstroUser {
-  id              String    @id // 直接使用認證系統的用戶ID作為主鍵
-  birthDate       DateTime  @map("birth_date") @db.Date
-  birthTime       DateTime? @map("birth_time") @db.Time
-  birthLocation   String    @map("birth_location")
-  latitude        Decimal?  @db.Decimal(10, 8)
-  longitude       Decimal?  @db.Decimal(11, 8)
+  id              String        @id
+  birthDate       DateTime      @map("birth_date") @db.Date
+  birthTime       DateTime?     @map("birth_time") @db.Time(6)
+  birthLocation   String        @map("birth_location")
+  latitude        Decimal?      @db.Decimal(10, 8)
+  longitude       Decimal?      @db.Decimal(11, 8)
   timezone        String?
-  todayDivination Json?     @map("today_divination")
-  divinationDate  DateTime? @map("divination_date") @db.Date
-  createdAt       DateTime  @default(now()) @map("created_at")
-  updatedAt       DateTime  @updatedAt @map("updated_at")
-
-  // Relations
-  chatSessions ChatSession[]
+  todayDivination Json?         @map("today_divination")
+  divinationDate  DateTime?     @map("divination_date") @db.Date
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+  chatSessions    ChatSession[]
 
   @@index([divinationDate])
   @@map("astro_users")
 }
 
 model ChatSession {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  sessionId String   @unique @map("session_id")
-  userId    String   @map("user_id")
-  title     String   @db.VarChar(500)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  user     AstroUser     @relation(fields: [userId], references: [id])
-  messages ChatMessage[]
+  id        String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sessionId String        @unique @map("session_id")
+  userId    String        @map("user_id")
+  title     String        @db.VarChar(500)
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+  messages  ChatMessage[]
+  user      AstroUser     @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([sessionId])
@@ -47,37 +43,44 @@ model ChatSession {
 }
 
 model ChatMessage {
-  id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  sessionId   String      @map("session_id")
-  role        Role
-  messageType MessageType @map("message_type")
-  content     String
-
-  // 工具相關欄位
-  toolId     String? @map("tool_id")
-  toolName   String? @map("tool_name")
-  toolArgs   Json?   @map("tool_args")
-  toolResult String? @map("tool_result")
-
-  // 文本訊息相關欄位
-  sources Json?
-  prompts Json?
-
-  // 評分及優化欄位
-  score Int?    @db.SmallInt
-  note  String?
-
-  // 訊息順序
-  messageOrder Int      @map("message_order")
-  createdAt    DateTime @default(now()) @map("created_at")
-
-  // Relations
-  session ChatSession @relation(fields: [sessionId], references: [sessionId], onDelete: Cascade)
+  id           String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sessionId    String      @map("session_id")
+  role         Role
+  messageType  MessageType @map("message_type")
+  content      String
+  toolId       String?     @map("tool_id")
+  toolName     String?     @map("tool_name")
+  toolArgs     Json?       @map("tool_args")
+  toolResult   String?     @map("tool_result")
+  sources      Json?
+  prompts      Json?
+  score        Int?        @db.SmallInt
+  note         String?
+  messageOrder Int         @map("message_order")
+  createdAt    DateTime    @default(now()) @map("created_at")
+  session      ChatSession @relation(fields: [sessionId], references: [sessionId], onDelete: Cascade)
 
   @@index([sessionId])
   @@index([createdAt])
   @@index([sessionId, messageOrder])
   @@map("chat_messages")
+}
+
+model AstroDataset {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  promptTemplate String   @map("prompt_template")
+  history        String
+  toolResult     String   @map("tool_result")
+  userInput      String   @map("user_input")
+  modelAnswer    String   @map("model_answer")
+  tristanAnswer  String?  @map("tristan_answer")
+  modelScore     Float?   @map("model_score")
+  tristanScore   Float?   @map("tristan_score")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  userId         String   @map("user_id")
+
+  @@map("astro_dataset")
 }
 
 enum Role {
@@ -90,21 +93,4 @@ enum MessageType {
   tool_use     @map("tool_use")
   tool_result  @map("tool_result")
   choose_agent @map("choose_agent")
-}
-
-model AstroDataset {
-  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId         String   @map("user_id")
-  promptTemplate String   @map("prompt_template")
-  history        String
-  toolResult     String   @map("tool_result")
-  userInput      String   @map("user_input")
-  modelAnswer    String   @map("model_answer")
-  tristanAnswer  String?  @map("tristan_answer")
-  modelScore     Float?   @map("model_score")
-  tristanScore   Float?   @map("tristan_score")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
-
-  @@map("astro_dataset")
 }
